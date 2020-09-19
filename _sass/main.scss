@@ -1,0 +1,132 @@
+
+body {
+  margin: 0;
+  background-color: #fff;
+background: radial-gradient(#d7d7d7 3px, transparent 4px), radial-gradient(#b39174 3px, transparent 4px), linear-gradient(#fff 4px, transparent 0), linear-gradient(45deg, transparent 74px, transparent 75px, #f0f0f0 75px, #e6e6e6 76px, transparent 77px, transparent 109px), linear-gradient(-45deg, transparent 75px, transparent 76px, #a4a4a4 76px, #e1e1e1 77px, transparent 78px, transparent 109px), #fff;
+background-size: 109px 109px, 109px 109px,100% 6px, 109px 109px, 109px 109px;
+background-position: 54px 55px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+  font-family: sans-serif;
+}
+
+header {
+  h1 {
+    text-align: center;
+    margin:0;
+    padding: 30px 0 20px;
+  }
+}
+
+#page {
+margin: 0 auto;
+}
+
+#content {
+  width: 1420px;
+  margin: 0 auto;
+  font-size: 1.2em;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 30px;
+  #logo {
+    width: 200px;
+  }
+  ul {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+  }
+  ul a {
+    flex: auto;
+    margin: 5px 25px;
+    padding: 2px;
+    li.active {
+      font-weight: bold;
+    }
+  }
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+p {
+   text-align: justify;
+}
+
+header, nav {
+  width: 100%;
+  background: #fff;
+}
+
+.infobox {
+  h2 {
+    text-align: center;
+  }
+  background: #fff;
+  padding: 0 20px;
+  margin: 30px 0;
+}
+
+#book {
+  $gap: 15px;
+  display: flex;
+  margin: 30px 0 -$gap;
+  > * {
+    background: #fff;
+    margin: 0 $gap; 
+  }
+  > div {
+    flex: 75 75 0;
+  }
+  > p {
+    flex: 25 25 0;
+    padding: 5px;
+  }
+}
+
+#yoga-types-info {
+  $gap: 15px;
+  display: flex;
+  margin: 0 -$gap;
+  > div {
+    flex: 1;
+    margin: 0 $gap; 
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  #content {
+    width: 75%;
+  }
+  /*nav {
+    padding: 5px
+  }
+  nav ul  {
+    flex-direction: column
+  }
+  img.small {
+    display: inline;
+  }
+  img.large {
+    display: none;
+  }*/
+}
+
+/*@media screen and (max-width: 750px) {
+  .accommodation {
+    flex-direction: column;
+    &:nth-child(even) :nth-child(1) {
+      order: 0;
+    }
+    div:nth-child(1) {
+      margin: 0 auto !important;
+    }
+  }
+}
+*/

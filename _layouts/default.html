@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>{{ page.title }} - {{ site.title }}</title>
+    <meta name="description" content="Faites du Yoga avec Joe">
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.js" integrity="sha256-mMw9aRRFx9TK/L0dn25GKxH/WH7rtFTp+P9Uma+2+zc=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
+      <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridWeek',
+          titleFormat: { day: 'numeric', month: 'short' },
+          locale: 'fr',
+          firstDay: 1,
+          buttonText: {
+            today: "Aujourd'hui"
+          },
+          height: "auto"
+        });
+        calendar.render();
+      });
+
+    </script>
+  </head>
+  <body>
+  <div id="page">
+    <header>
+      <h1>Joe Ambrosio<br/>Yoga</h1>
+    </header>
+    <nav>
+      <img id="logo" src="{{ '/assets/logo.jpg' | relative_url }}"/>
+      <ul>
+        <a href="/"><li {% if page.url == "/" %}class="active"{% endif %}>HOME</li></a>
+        <a href="https://www.coco-et-galago.fr/yoga"><li>BLOG</li></a>
+        <a href="/a-propos"><li {% if page.url != "/" %}class="active"{% endif %}>A PROPOS</li></a>
+      </ul>
+    </nav>
+    <div id="content">
+      {{ content}}
+    </div>
+  </div>
+  </body>
+</html>

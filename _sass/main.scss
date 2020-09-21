@@ -1,11 +1,11 @@
 
 body {
   margin: 0;
-  background-color: #fff;
-background: radial-gradient(#d7d7d7 3px, transparent 4px), radial-gradient(#b39174 3px, transparent 4px), linear-gradient(#fff 4px, transparent 0), linear-gradient(45deg, transparent 74px, transparent 75px, #f0f0f0 75px, #e6e6e6 76px, transparent 77px, transparent 109px), linear-gradient(-45deg, transparent 75px, transparent 76px, #a4a4a4 76px, #e1e1e1 77px, transparent 78px, transparent 109px), #fff;
+  background-color: #f2f2f2;
+  background: radial-gradient(#fff 3px, transparent 4px), radial-gradient(#fff 3px, transparent 4px), linear-gradient(#f2f2f2 4px, transparent 0), linear-gradient(45deg, transparent 74px, transparent 75px, #fff 75px, #fff 76px, transparent 77px, transparent 109px), linear-gradient(-45deg, transparent 75px, transparent 76px, #f2f2f2 76px, #fff 77px, transparent 78px, transparent 109px), #f2f2f2;
 background-size: 109px 109px, 109px 109px,100% 6px, 109px 109px, 109px 109px;
 background-position: 54px 55px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
-  font-family: sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 header {
@@ -21,9 +21,10 @@ margin: 0 auto;
 }
 
 #content {
-  width: 1420px;
+  width: 1000px;
   margin: 0 auto;
-  font-size: 1.2em;
+  font-size: .95em;
+  line-height: 1.2em;
 }
 
 nav {
@@ -32,7 +33,7 @@ nav {
   justify-content: center;
   padding-bottom: 30px;
   #logo {
-    width: 200px;
+    width: 80px;
   }
   ul {
     display: flex;
@@ -76,28 +77,32 @@ header, nav {
 #book {
   $gap: 15px;
   display: flex;
-  margin: 30px 0 -$gap;
+  margin: 110px 0-$gap 30px;
   > * {
     background: #fff;
     margin: 0 $gap; 
+    padding: 20px;
   }
   > div {
     flex: 75 75 0;
   }
   > p {
     flex: 25 25 0;
-    padding: 5px;
   }
 }
 
 #yoga-types-info {
   $gap: 15px;
   display: flex;
-  margin: 0 -$gap;
+  margin: 30px 0-$gap;
   > div {
     flex: 1;
     margin: 0 $gap; 
   }
+}
+
+#pranayama, #meditation {
+  padding: 1px 20px;
 }
 
 @media screen and (max-width: 1280px) {

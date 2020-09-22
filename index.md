@@ -3,32 +3,41 @@ layout: default
 title: "Home"
 ---
 
+<div id="welcome" class="infobox">
+	<p>
+		Hey, bienvenue !
+		<br/>
+		<br/>
+		Je m’appelle Joe, et je vous propose ici de découvrir, d’explorer ou d’approfondir votre connaissance du yoga. 
+		Le yoga est un chemin de découverte et de transformation. Il nous invite à explorer chaque partie de notre être : notre corps, notre respiration, nos pensées... Afin de les dépoussiérer, et de les laisser rayonner.
+		<br/>
+		<br/>
+		Les asanas (postures) nous apprennent force, souplesse et légèreté du corps. En cherchant à les réaliser en conscience, nous développons aussi notre concentration et apaisons notre mental.
+		<br/>
+		<br/>
+		Associé à pranayama (contrôle de la respiration) et dhyana (méditation), le yoga mène vers une profonde découverte de soi, et s’avère être un allié précieux pour notre vie quotidienne ! Dans chacun de mes cours, hatha ou vinyasa yoga, il me tient à cœur de vous proposer ces instants de méditation. 
+		<br/>
+		<br/>
+		Donc si le cœur vous en dit, on se retrouve juste ici ↴
+	</p>
+</div>
+
 <div id="book">
 	<div>
 		<h2>Réserver un cours</h2>
 		<div id='calendar'></div>
 	</div>
-	<p>Les cours proposés sont en live, via un lien zoom que vous recevrez par mail.<br/>Durée : 1h15<br/>Tarif : 10€</p>
+	<p>Les cours proposés sont en live, disponibles via un lien zoom que vous recevrez par mail.<br/><br/><br/><br/>Durée : 1h15<br/>Tarif : 10€</p>
 </div>
 
 
 <div id="yoga-types-info">
 	<div class="infobox">
 		<h2>Vinyasa</h2>
-		<p>Le Vinyasa yoga est une pratique dynamique et rythmique. Les asanas s’enchaînent de manière fluide en se basant sur la respiration, ce qui en fait un yoga endurant, au rythme plutôt soutenu. Il développe la force, la souplesse mais aussi l’agilité et l’endurance.</p>
+		<p>Le Vinyasa yoga est une pratique dynamique et créative, qui allie respiration et mouvement. En se synchronisant à la respiration, les asanas s’enchaînent de manière fluide, ce qui en fait un yoga endurant, au rythme plutôt soutenu. En pratiquant le Vinyasa yoga, on développe sa force et sa souplesse mais aussi son endurance et son agilité. </p>
 	</div>
 	<div class="infobox">
 		<h2>Hatha</h2>
-		<p>Le Hatha yoga représente l’approche traditionnelle du yoga. C‘est de celui-ci que sont issus tous les asanas. La pratique est plus introspective. Nous prenons le temps de respirer longuement dans les postures, de les laisser évoluer, et d’en ressentir les effets dans tout le corps. Le rythme de la pratique est modéré, voire lent selon les séances, mais ne vous fiez pas aux apparences ! Le Hatha yoga fait travailler le corps en profondeur, la force tout autant que la souplesse.</p>
+		<p>Le Hatha yoga représente l’approche traditionnelle du yoga. C‘est de celui-ci que sont issus tous les asanas. La pratique est plus introspective, plus méditative : nous prenons le temps de respirer longuement dans les postures, de les laisser évoluer, et d’en ressentir les effets dans tout le corps, au moment présent. Le rythme de la pratique est modéré. Le Hatha yoga fait travailler le corps en profondeur, la force tout autant que la souplesse. </p>
 	</div>
-</div>
-
-<div id="pranayama" class="infobox">
-	<h2>Pranayama</h2>
-	<p>Que ce soit en Hatha ou Vinyasa yoga, vous retrouverez dans tous mes cours un temps pour des exercices de respiration (Pranayamas). La respiration est un élément très important en yoga. Elle accompagne tous les mouvements, et permet au corps de se mouvoir avec justesse, au bon moment, au bon endroit. Les Pranayamas nous apprennent à reconnaître notre souffle, à mieux le ressentir, et à ouvrir et étirer la cage thoracique.</p>
-</div>
-
-<div id="meditation" class="infobox">
-	<h2>Méditation</h2>
-	<p>J’aime autant que possible introduire des temps de méditation en fin de séance. Le Hatha yoga est pratiqué, à la base, pour préparer le corps à la méditation. Ainsi délié de ses tensions et harmonisé, il est plus apte à se concentrer. La méditation, c’est comme se tenir à l’écart de l’agitation, en retrait, pour observer ce qui se passe en nous. Elle nous aide à y voir plus clair et à calmer le flot incessant de nos pensées, pour se recentrer sur l’essentiel.</p>
 </div>

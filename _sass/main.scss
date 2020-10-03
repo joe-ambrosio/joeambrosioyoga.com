@@ -2,7 +2,7 @@ $background-color: #fffcf5;;
 
 body {
   margin: 0;
-  background: url('/assets/back.jpg');
+  background: url('/assets/back2.jpg');
   background-size: cover;
   font-family: raleway, sans-serif;
   font-weight: 400;
@@ -124,6 +124,46 @@ nav {
   > p {
     flex: 25 25 0;
   }
+  #calendar {
+    h2 {
+      font-family: raleway, sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 1.4em;
+    }
+    .fc-button {
+      background-color: var(--fc-button-bg-color,#000);
+      border: 0px;
+      &.fc-today-button {
+        &:disabled {
+          opacity: 1;
+        }
+        color: #000;
+        background-color: #b76a3d59;
+      }
+      &.fc-prev-button, &.fc-next-button  {
+        background-color: #74503b;
+      }
+    }
+    .fc-col-header-cell-cushion {
+      padding: 6px 10px;
+    }
+    .fc-col-header-cell-cushion {
+      font-weight: normal;
+    }
+    .fc-button:focus, .fc-button-primary:focus {
+      box-shadow: unset;
+    }
+    .fc-scrollgrid-section-sticky > * {
+      background-color: #b76a3d59;
+    }
+    .fc-daygrid-day.fc-day-today {
+      background-color: #ececec;
+    }
+    .fc-event-main-frame {
+      flex-direction: column;
+    }
+  }
 }
 
 #yoga-types-info {
@@ -161,6 +201,12 @@ footer {
   img.large {
     display: none;
   }*/
+}
+
+@media screen and (max-width: 1000px) {
+  #book #calendar .fc-col-header-cell-cushion {
+    padding: 6px 4px;
+  }
 }
 
 /*@media screen and (max-width: 750px) {

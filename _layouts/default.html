@@ -8,47 +8,6 @@
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 
     <link rel="stylesheet" href="https://use.typekit.net/cqf7yal.css">
-
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.js" integrity="sha256-mMw9aRRFx9TK/L0dn25GKxH/WH7rtFTp+P9Uma+2+zc=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const now = new Date
-        var then = new Date
-        then.setDate(now.getDate() + 90)
-        const calendarEl = document.getElementById('calendar');
-        const calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridWeek',
-          titleFormat: { day: 'numeric', month: 'short' },
-          locale: 'fr',
-          firstDay: 1,
-          buttonText: {
-            today: "Aujourd'hui"
-          },
-          eventDisplay: "block",
-          eventTimeFormat: {
-            hour: '2-digit',
-            minute: '2-digit',
-            meridiem: false
-          },
-          eventSources: [{
-            url: '/events.json',
-            startParam: now.toISOString(),
-            endParam: then.toISOString(),
-            color: "#74503b",
-            textColor: "white",
-            failure: () => {
-              calendarEl.prepend("Impossible de récupérer les cours actuellement, revenez plus tard.")
-            }
-          }],
-          eventClick: (info) => {
-            console.log(info.event.id)
-          },
-          height: "auto"
-        });
-        calendar.render();
-      });
-    </script>
   </head>
   <body>
   <div id="page">

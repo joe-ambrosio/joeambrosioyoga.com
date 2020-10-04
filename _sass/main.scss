@@ -103,6 +103,13 @@ nav {
   border: 1px solid #000;
 }
 
+#payment-successful {
+  padding: 35px 20px;
+  color: green;
+  text-align: center;
+  display: none;
+}
+
 #welcome {
   padding: 5px 20px;
   margin: 0px 0 30px;
@@ -156,12 +163,16 @@ nav {
     }
     .fc-scrollgrid-section-sticky > * {
       background-color: #b76a3d59;
+      z-index: unset;
     }
     .fc-daygrid-day.fc-day-today {
       background-color: #ececec;
     }
     .fc-event-main-frame {
       flex-direction: column;
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }
@@ -173,6 +184,87 @@ nav {
   > div {
     flex: 1;
     margin: 0 $gap; 
+  }
+}
+
+
+#modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  > div {
+    display: flex;
+    position: relative;
+    background-color: $background-color;
+    margin: auto;
+    padding: 40px;
+    border: 1px solid #000;
+    width: 800px;
+    > div {
+      flex: 1;
+    }
+    p {
+      padding: 0;
+    }
+    #book-info p {
+      padding-top: 12px;
+    }
+    #lesson-id {
+      display: none;
+    }
+    #lesson-warning{
+      font-style: italic;
+    }
+  }
+  #close-modal {
+    position: absolute;
+    right: 9px;
+    top: 4px;
+    color: #aaa;
+    float: right;
+    font-size: 35px;
+    font-weight: bold;
+    &:hover, &:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    } 
+  }
+  button, input {
+    display: inline-block;
+    height: 40px;
+    width: 100%;
+    font-size: 15px;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+  }
+  input {
+    width: 99.6%;
+    text-indent: 14px;
+    &::placeholder {
+      color: #848484;
+    }
+  }
+  button {
+    margin: 5px 0;
+    background: #74503b;
+    color: #fff;
+    &:hover, &:focus {
+      cursor: pointer;
+    } 
+    &:disabled {
+      opacity: .8;
+      cursor: not-allowed;
+    }
+
   }
 }
 

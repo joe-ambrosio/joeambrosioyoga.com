@@ -155,17 +155,40 @@ title: "Home"
 	          ["price", info.event.extendedProps.price],
 	          ["bookings-remaining", bookingsRemaining],
 	        ].map(r => replaceForLesson(r[0], r[1]))
-	        // stripe.redirectToCheckout({
-	        //   lineItems: [{price: info.event.id, quantity: 1}],
-	        //   mode: 'payment',
-	        //   successUrl: window.location.href + '#payment-successful',
-	        //   cancelUrl: window.location.href,
-	        //   submitType: "book"
-	        // })
 	      },
 	      height: "auto"
 	    });
 	    calendar.render();
+	  	document.getElementById('lesson-book').addEventListener("click", () => {
+	     	fetch(
+      		"https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/setupNewBooking",
+      		{
+      			method: 'POST',
+      			headers: {
+      			  'Content-Type': 'application/json'
+      			},
+      			body: JSON.stringify({
+      					id: document.getElementById('lesson-id').innerText,
+      					email: document.getElementById('email').value
+      			})
+      	})
+        .then(response => {
+        	if (response.ok) {
+        		return response.json()
+        	} else {
+        		throw new Error("No OK response")
+        	}
+        })
+        .then(responseJson => {
+        	stripe.redirectToCheckout({
+        		"sessionId": responseJson.stripe_session_id
+        	})
+        })
+        .catch(err => {
+        	console.error(err)
+        	alert(0)
+        })
+	    })
 	  });
 	</script>
 </div>

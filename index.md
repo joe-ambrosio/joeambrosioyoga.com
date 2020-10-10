@@ -54,16 +54,20 @@ title: "Home"
     	<p id="lesson-time"></p>
     	<p>
     		Tarif : <span id="lesson-price"></span>€<br/>
-    		Durée : <span id="lesson-duration"></span>
+    		Durée : <span id="lesson-duration"></span><br/>
+    		Places disponibles : <span id="lesson-bookings-remaining"></span>
     		<p id="lesson-description"></p>
     		<p id="lesson-warning">Cours non adapté aux femmes enceintes.</p>
     		<p id="lesson-id"></p>
     	</p>
     </div>
-    <div id="book-info">
+    <div class="booking" id="booking-info">
     	<p>Merci de remplir une addresse email valide, vous recevrez sur cette addresse toutes les informations pour vous connecter au cours.</p>
     	<input type="email" name="email" autocomplete="true" placeholder="jekiffeleyoga@gmail.com" id="email" />
     	<button id="lesson-book" disabled="disabled">Continuer vers le paiement</button>
+    </div>
+    <div class="booking" id="booking-full">
+    	<p>Oups, ce cours est complet !</p>
     </div>
   </div>
 </div>
@@ -78,6 +82,28 @@ title: "Home"
 	    document.getElementById("lesson-" + name).innerText = text
 	  }
 	  document.addEventListener('DOMContentLoaded', function() {
+	  	fetch('https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/events.json')
+		  .then(response => {
+		  	if (response.ok) {
+		  		return response.json()
+		  	} else {
+		  		throw new Error("No OK response")
+		  	}
+		  })
+		  .then(events => {
+		  	calendar.addEventSource({
+		  		events: events,
+		  		color: "#74503b",
+		  		textColor: "white",
+		  		failure: () => {
+		  		  calendarEl.prepend("Impossible d'afficher les cours actuellement, revenez plus tard.")
+		  		}
+		  	})
+		  })
+		  .catch(err => {
+		  	console.error(err)
+		  	calendarEl.prepend("Impossible de récupérer les cours actuellement, revenez plus tard.")
+		  })
 	    if(window.location.hash == "#payment-successful") {
 	      document.getElementById("payment-successful").style.display = "block"
 	    }
@@ -95,9 +121,6 @@ title: "Home"
 	    })
 	    emailField.dispatchEvent(new Event("input"))
 	    var stripe = Stripe('pk_test_q23TkZKgp8unr6VHj80CFF4F00XhYwquMh');
-	    const now = new Date
-	    var then = new Date
-	    then.setDate(now.getDate() + 90)
 	    const calendarEl = document.getElementById('calendar');
 	    const calendar = new FullCalendar.Calendar(calendarEl, {
 	      initialView: 'dayGridWeek',
@@ -113,23 +136,16 @@ title: "Home"
 	        minute: '2-digit',
 	        meridiem: false
 	      },
-	      eventSources: [{
-	        url: '/events.json',
-	        startParam: now.toISOString(),
-	        endParam: then.toISOString(),
-	        color: "#74503b",
-	        textColor: "white",
-	        failure: () => {
-	          calendarEl.prepend("Impossible de récupérer les cours actuellement, revenez plus tard.")
-	        }
-	      }],
 	      eventClick: (info) => {
 	        modal.style.display = "flex"
 	        const durationMs = info.event.end - info.event.start
-	        const duration = `${parseInt(durationMs/(3600*1000))}h${parseInt(durationMs/(60*1000))%60}`
+	        const duration = `${parseInt(durationMs/(3600*1000))}h${String(parseInt(durationMs/(60*1000))%60).padStart(2, '0')}`
 	        const monthNames = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
 	        const dayNames = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
 	        const start = `${dayNames[info.event.start.getDay() - 1]} ${info.event.start.getDate()} ${monthNames[info.event.start.getMonth()]} à ${info.event.start.getHours()}h${String(info.event.start.getMinutes()).padStart(2, '0')}`
+	        const bookingsRemaining = parseInt(info.event.extendedProps.bookings_remaining)
+	        document.getElementById("booking-info").style.display = (bookingsRemaining > 0) ? "block" : "none"
+	        document.getElementById("booking-full").style.display = (bookingsRemaining > 0) ? "none" : "block"
 	        ;[
 	          ["id", info.event.id],
 	          ["title", info.event.extendedProps.long_title],
@@ -137,6 +153,7 @@ title: "Home"
 	          ["time", start],
 	          ["duration", duration],
 	          ["price", info.event.extendedProps.price],
+	          ["bookings-remaining", bookingsRemaining],
 	        ].map(r => replaceForLesson(r[0], r[1]))
 	        // stripe.redirectToCheckout({
 	        //   lineItems: [{price: info.event.id, quantity: 1}],

@@ -4,8 +4,19 @@
       "long_title": "Cours de Hatha yoga",
       "title": "Hatha",
       "description": "",
-      "start": "2020-10-03T09:00:00",
-      "end": "2020-10-03T10:15:00",
-      "price": 10
+      "start": "2020-10-10T18:24:45+01:00",
+      "end": "2020-10-11T10:15:00",
+      "price": 10,
+      "remaining_places": 10
+    },
+    {
+      "id": "price_1HYDLJLkHclSAGfALMxG9xIT",
+      "long_title": "Cours de Hatha yoga",
+      "title": "Hatha",
+      "description": "",
+      "start": "2020-10-09T09:00:00",
+      "end": "2020-10-09T10:15:00",
+      "price": 0,
+      "remaining_places": 0
     }
   ]

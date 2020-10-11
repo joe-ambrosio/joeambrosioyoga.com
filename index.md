@@ -64,7 +64,7 @@ title: "Home"
     <div class="booking" id="booking-info">
     	<p>Merci de remplir une addresse email valide, vous recevrez sur cette addresse toutes les informations pour vous connecter au cours.</p>
     	<input type="email" name="email" placeholder="jekiffeleyoga@gmail.com" id="email" />
-    	<button id="lesson-book" disabled="disabled" type="submit">Continuer vers le paiement</button>
+    	<button id="lesson-book" disabled="disabled" type="submit">Continuer vers le paiement<span id="wait"></span></button>
     </div>
     <div class="booking" id="booking-full">
     	<p>Oups, ce cours est complet !</p>
@@ -78,15 +78,35 @@ title: "Home"
 	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.js" integrity="sha256-mMw9aRRFx9TK/L0dn25GKxH/WH7rtFTp+P9Uma+2+zc=" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
 	<script>
-		const emailInput = document.getElementById('email')
-		const previousEmail = localStorage.getItem('email')
-		if (previousEmail) {
-			emailInput.value = previousEmail
-		}
+		// Utils
 	  function replaceForLesson(name, text) {
 	    document.getElementById("lesson-" + name).innerText = text
 	  }
+	  // If end of payment flow
+	  if(window.location.hash == "#payment-successful") {
+	    document.getElementById("payment-successful").style.display = "block"
+	  }
+	  //
 	  document.addEventListener('DOMContentLoaded', function() {
+	    // Vars
+	    const modal = document.getElementById("modal")
+			const emailInput = document.getElementById('email')
+	    const calendarEl = document.getElementById('calendar');
+	    const lessonBook = document.getElementById("lesson-book")
+	    const reEmail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+	    const stripe = Stripe('pk_test_q23TkZKgp8unr6VHj80CFF4F00XhYwquMh');
+			// Restore previous email inputed
+			const previousEmail = localStorage.getItem('email')
+			if (previousEmail) {
+				emailInput.value = previousEmail
+			}
+		  // Modal handling
+	    closeModal = () => modal.style.display = "none"
+	    document.getElementById("close-modal").addEventListener("click", closeModal)
+	    window.addEventListener("click", (event) => {
+	      event.target == modal && closeModal()
+	    })
+			// Fetch events
 	  	fetch('https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/events.json')
 		  .then(response => {
 		  	if (response.ok) {
@@ -99,33 +119,19 @@ title: "Home"
 		  	calendar.addEventSource({
 		  		events: events,
 		  		color: "#74503b",
-		  		textColor: "white",
-		  		failure: () => {
-		  		  calendarEl.prepend("Impossible d'afficher les cours actuellement, revenez plus tard.")
-		  		}
+		  		textColor: "white"
 		  	})
 		  })
 		  .catch(err => {
 		  	console.error(err)
 		  	calendarEl.prepend("Impossible de récupérer les cours actuellement, revenez plus tard.")
 		  })
-	    if(window.location.hash == "#payment-successful") {
-	      document.getElementById("payment-successful").style.display = "block"
-	    }
-	    const modal = document.getElementById("modal");
-	    closeModal = () => modal.style.display = "none"
-	    document.getElementById("close-modal").addEventListener("click", closeModal)
-	    window.addEventListener("click", (event) => {
-	      event.target == modal && closeModal()
-	    })
-	    const lessonBook = document.getElementById("lesson-book")
-	    const reEmail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+	    // Validate email in real time
 	  	emailInput.addEventListener("input", (event) => {
 	      	lessonBook.disabled = ! reEmail.test(String(event.target.value).toLowerCase())
 	    })
 	    emailInput.dispatchEvent(new Event("input"))
-	    var stripe = Stripe('pk_test_q23TkZKgp8unr6VHj80CFF4F00XhYwquMh');
-	    const calendarEl = document.getElementById('calendar');
+	    // Init FullCalendar
 	    const calendar = new FullCalendar.Calendar(calendarEl, {
 	      initialView: 'dayGridWeek',
 	      titleFormat: { day: 'numeric', month: 'short' },
@@ -140,14 +146,15 @@ title: "Home"
 	        minute: '2-digit',
 	        meridiem: false
 	      },
+	      height: "auto",
 	      eventClick: (info) => {
-	        modal.style.display = "flex"
+	      	// Populate the modal
 	        const durationMs = info.event.end - info.event.start
 	        const duration = `${parseInt(durationMs/(3600*1000))}h${String(parseInt(durationMs/(60*1000))%60).padStart(2, '0')}`
 	        const monthNames = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
 	        const dayNames = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
 	        const start = `${dayNames[info.event.start.getDay() - 1]} ${info.event.start.getDate()} ${monthNames[info.event.start.getMonth()]} à ${info.event.start.getHours()}h${String(info.event.start.getMinutes()).padStart(2, '0')}`
-	        const bookingsRemaining = parseInt(info.event.extendedProps.bookings_remaining)
+	        const bookingsRemaining = info.event.extendedProps.bookings_remaining
 	        document.getElementById("booking-info").style.display = (bookingsRemaining > 0) ? "block" : "none"
 	        document.getElementById("booking-full").style.display = (bookingsRemaining > 0) ? "none" : "block"
 	        ;[
@@ -159,23 +166,35 @@ title: "Home"
 	          ["price", info.event.extendedProps.price],
 	          ["bookings-remaining", bookingsRemaining],
 	        ].map(r => replaceForLesson(r[0], r[1]))
-	      },
-	      height: "auto"
-	    });
-	    calendar.render();
+	        // Diplay it
+	        modal.style.display = "flex"
+	      }
+	    })
+	    calendar.render()
+	    // Handle modal submit button
 	  	document.getElementById('lesson-book').addEventListener("click", () => {
+	  		// Loading animation
+  		  const wait = document.getElementById("wait")
+	  		const oldLessonBookText = lessonBook.innerText
+	  		lessonBook.disabled = true
+	  		const dotsSetInterval = setInterval(() => {
+  		    if (wait.innerHTML.length > 3 ) 
+  		        wait.innerHTML = ""
+  		    else 
+  		        wait.innerHTML += "."
+	  		}, 250)
+	  		// Save email
 	  		const email = emailInput.value
-	  		localStorage.setItem('email', email);
+	  		localStorage.setItem('email', email)
+	  		// Create a Stripe Session
 	     	fetch(
       		"https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/setupNewBooking",
       		{
-      			method: 'POST',
-      			headers: {
-      			  'Content-Type': 'application/json'
-      			},
+      			method: "POST",
+      			headers: { "Content-Type": "application/json" },
       			body: JSON.stringify({
-      					id: document.getElementById('lesson-id').innerText,
-      					email: email
+    					id: document.getElementById("lesson-id").innerText,
+    					email: email
       			})
       	})
         .then(response => {
@@ -185,14 +204,17 @@ title: "Home"
         		throw new Error("No OK response")
         	}
         })
-        .then(responseJson => {
-        	stripe.redirectToCheckout({
-        		"sessionId": responseJson.stripe_session_id
-        	})
+        .then(j => {
+        	stripe.redirectToCheckout({"sessionId": j.stripe_session_id})
         })
         .catch(err => {
+        	// Clear animation
+        	clearInterval(dotsSetInterval)
+        	document.getElementById("wait").innerHTML = ""
+        	lessonBook.innerText = oldLessonBookText
+        	//
         	console.error(err)
-        	alert(0)
+        	document.getElementById("booking-info").append("Impossible de mettre en place le paiement, veuillez rééssayer plus tard.")
         })
 	    })
 	  });

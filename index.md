@@ -63,8 +63,8 @@ title: "Home"
     </div>
     <div class="booking" id="booking-info">
     	<p>Merci de remplir une addresse email valide, vous recevrez sur cette addresse toutes les informations pour vous connecter au cours.</p>
-    	<input type="email" name="email" autocomplete="true" placeholder="jekiffeleyoga@gmail.com" id="email" />
-    	<button id="lesson-book" disabled="disabled">Continuer vers le paiement</button>
+    	<input type="email" name="email" placeholder="jekiffeleyoga@gmail.com" id="email" />
+    	<button id="lesson-book" disabled="disabled" type="submit">Continuer vers le paiement</button>
     </div>
     <div class="booking" id="booking-full">
     	<p>Oups, ce cours est complet !</p>
@@ -78,6 +78,11 @@ title: "Home"
 	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.js" integrity="sha256-mMw9aRRFx9TK/L0dn25GKxH/WH7rtFTp+P9Uma+2+zc=" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
 	<script>
+		const emailInput = document.getElementById('email')
+		const previousEmail = localStorage.getItem('email')
+		if (previousEmail) {
+			emailInput.value = previousEmail
+		}
 	  function replaceForLesson(name, text) {
 	    document.getElementById("lesson-" + name).innerText = text
 	  }
@@ -115,11 +120,10 @@ title: "Home"
 	    })
 	    const lessonBook = document.getElementById("lesson-book")
 	    const reEmail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
-	  	const emailField = document.getElementById("email")
-	  	emailField.addEventListener("input", (event) => {
+	  	emailInput.addEventListener("input", (event) => {
 	      	lessonBook.disabled = ! reEmail.test(String(event.target.value).toLowerCase())
 	    })
-	    emailField.dispatchEvent(new Event("input"))
+	    emailInput.dispatchEvent(new Event("input"))
 	    var stripe = Stripe('pk_test_q23TkZKgp8unr6VHj80CFF4F00XhYwquMh');
 	    const calendarEl = document.getElementById('calendar');
 	    const calendar = new FullCalendar.Calendar(calendarEl, {
@@ -160,6 +164,8 @@ title: "Home"
 	    });
 	    calendar.render();
 	  	document.getElementById('lesson-book').addEventListener("click", () => {
+	  		const email = emailInput.value
+	  		localStorage.setItem('email', email);
 	     	fetch(
       		"https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/setupNewBooking",
       		{
@@ -169,7 +175,7 @@ title: "Home"
       			},
       			body: JSON.stringify({
       					id: document.getElementById('lesson-id').innerText,
-      					email: document.getElementById('email').value
+      					email: email
       			})
       	})
         .then(response => {

@@ -118,7 +118,7 @@ nav {
 #book {
   $gap: 15px;
   display: flex;
-  margin: 30px 0-$gap 30px;
+  margin: 30px 0-$gap;
   > * {
     background: $background-color;
     margin: 0 $gap; 
@@ -189,6 +189,54 @@ nav {
   }
 }
 
+button, input {
+  display: inline-block;
+  height: 40px;
+  width: 100%;
+  font-size: 15px;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+}
+input {
+  width: 99.6%;
+  text-indent: 14px;
+  &::placeholder {
+    color: #848484;
+  }
+}
+button {
+  margin: 5px 0;
+  background: #74503b;
+  color: #fff;
+  &:hover, &:focus {
+    cursor: pointer;
+  } 
+  &:disabled {
+    opacity: .8;
+    cursor: not-allowed;
+  }
+}
+
+.booked-class-options {
+  $gap: 15px;
+  display: flex;
+  margin: 30px 0-$gap;
+  > div {
+    flex: 1;
+    margin: 0 $gap;
+    display: flex;
+    flex-direction: column;
+    button {
+      margin-top:auto;
+    }
+  }
+  p {
+    padding: 0;
+  }
+}
 
 #modal {
   display: none;
@@ -236,37 +284,6 @@ nav {
       text-decoration: none;
       cursor: pointer;
     } 
-  }
-  button, input {
-    display: inline-block;
-    height: 40px;
-    width: 100%;
-    font-size: 15px;
-    text-decoration: none;
-    border: none;
-    outline: none;
-    border-radius: 4px;
-    box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
-  }
-  input {
-    width: 99.6%;
-    text-indent: 14px;
-    &::placeholder {
-      color: #848484;
-    }
-  }
-  button {
-    margin: 5px 0;
-    background: #74503b;
-    color: #fff;
-    &:hover, &:focus {
-      cursor: pointer;
-    } 
-    &:disabled {
-      opacity: .8;
-      cursor: not-allowed;
-    }
-
   }
 }
 

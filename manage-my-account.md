@@ -6,7 +6,7 @@ title: "Gérer mon compte"
 <div class="infobox">
 	<p>
 	Mon email: <span id="account-email"></span><br/>
-	Crédit de votre compte : <span id="account-balance"></span><br/>
+	Solde de votre compte : <span id="account-balance"></span>€<br/>
 	Nombre de cours réservés à venir : <span id="nb-future-bookings"></span>
 	</p>
 </div>

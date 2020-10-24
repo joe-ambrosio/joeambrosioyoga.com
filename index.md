@@ -7,6 +7,10 @@ title: "Home"
 	Merci pour votre réservation ! Vous allez recevoir un email de confirmation.
 </div>
 
+<div id="credit-successful" class="infobox end-of-flow-success">
+	Cours crédité avec succès ! Le nouveau solde de votre compte est de <span id="new-balance"></span>€.
+</div>
+
 <div id="postpone-successful" class="infobox end-of-flow-success">
 	Cours reporté avec succès ! Vous allez reçevoir un email de confirmation. 
 </div>
@@ -91,11 +95,15 @@ title: "Home"
 	    document.getElementById("lesson-" + name).innerText = text
 	  }
 	  // If end of flow
-	  if(window.location.hash == "#payment-successful") {
+	  if (window.location.hash == "#payment-successful") {
 	    document.getElementById("payment-successful").style.display = "block"
 	  }
-	  if(window.location.hash == "#postpone-successful") {
+	  if (window.location.hash == "#postpone-successful") {
 	    document.getElementById("postpone-successful").style.display = "block"
+	  }
+	  if (window.location.hash.startsWith("#credit-successful")) {
+	    document.getElementById("credit-successful").style.display = "block"
+	    document.getElementById("new-balance").innerText = window.location.hash.split(":")[1]
 	  }
 	  // If postpone mode
 	  if (window.location.hash.startsWith("#postpone?")) {

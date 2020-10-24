@@ -103,11 +103,14 @@ nav {
   border: 1px solid #000;
 }
 
-#payment-successful {
+#payment-successful, #postmode-mode {
   padding: 35px 20px;
-  color: green;
   text-align: center;
   display: none;
+}
+
+#payment-successful {
+  color: green;
 }
 
 #welcome {
@@ -233,6 +236,19 @@ button {
       margin-top:auto;
     }
   }
+  p {
+    padding: 0;
+  }
+}
+
+#booked-class-template {
+  display: none;
+  p {
+    padding: 0;
+  }
+}
+
+.booked-class {
   p {
     padding: 0;
   }

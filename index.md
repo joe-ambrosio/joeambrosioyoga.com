@@ -7,6 +7,10 @@ title: "Home"
 	Merci pour votre réservation ! Vous allez recevoir un email de confirmation.
 </div>
 
+<div id="postmode-mode" class="infobox">
+	Pour finaliser votre report de cours, veuillez sélectionner le nouveau cours qui vous convient. 
+</div>
+
 <div id="welcome" class="infobox">
 	<p>
 		Hey, bienvenue !
@@ -58,7 +62,6 @@ title: "Home"
     		Places disponibles : <span id="lesson-bookings-remaining"></span>
     		<p id="lesson-description"></p>
     		<p id="lesson-warning">Cours non adapté aux femmes enceintes.</p>
-    		<p id="lesson-id"></p>
     	</p>
     </div>
     <div class="booking" id="booking-info">
@@ -79,12 +82,22 @@ title: "Home"
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
 	<script>
 		// Utils
+		window.vars = {postponeMode: false}
 	  function replaceForLesson(name, text) {
 	    document.getElementById("lesson-" + name).innerText = text
 	  }
 	  // If end of payment flow
 	  if(window.location.hash == "#payment-successful") {
 	    document.getElementById("payment-successful").style.display = "block"
+	  }
+	  // If postpone mode
+	  if (window.location.hash.startsWith("#postpone")) {
+	  	const params = new URLSearchParams(window.location.hash.slice(10))
+	  	window.vars.postponeMode = true
+	  	window.vars.customerId = params.get("customerId")
+	  	window.vars.lessonToPostponeId = params.get("lessonToPostponeId")
+	    document.getElementById("postmode-mode").style.display = "block"
+	    document.querySelector("#lesson-book").innerText = "Reporter pour ce cours"
 	  }
 	  //
 	  document.addEventListener('DOMContentLoaded', function() {
@@ -116,8 +129,10 @@ title: "Home"
 		  	}
 		  })
 		  .then(events => {
+		  	const filter = (window.vars.postponeMode) ? window.vars.lessonToPostponeId : ""
+		  	const filteredEvents = events.filter(e => e.id != filter)
 		  	calendar.addEventSource({
-		  		events: events,
+		  		events: filteredEvents,
 		  		color: "#74503b",
 		  		textColor: "white"
 		  	})
@@ -149,20 +164,16 @@ title: "Home"
 	      height: "auto",
 	      eventClick: (info) => {
 	      	// Populate the modal
-	        const durationMs = info.event.end - info.event.start
-	        const duration = `${parseInt(durationMs/(3600*1000))}h${String(parseInt(durationMs/(60*1000))%60).padStart(2, '0')}`
-	        const monthNames = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
-	        const dayNames = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
-	        const start = `${dayNames[info.event.start.getDay() - 1]} ${info.event.start.getDate()} ${monthNames[info.event.start.getMonth()]} à ${info.event.start.getHours()}h${String(info.event.start.getMinutes()).padStart(2, '0')}`
+	      	const {durationHuman, startHuman} = datetimeToFrenchDatetimeAndDuration(info.event.start, info.event.end)
 	        const bookingsRemaining = info.event.extendedProps.bookings_remaining
 	        document.getElementById("booking-info").style.display = (bookingsRemaining > 0) ? "block" : "none"
 	        document.getElementById("booking-full").style.display = (bookingsRemaining > 0) ? "none" : "block"
+	        window.vars.lessonId = info.event.id
 	        ;[
-	          ["id", info.event.id],
 	          ["title", info.event.extendedProps.long_title],
 	          ["description", info.event.extendedProps.description],
-	          ["time", start],
-	          ["duration", duration],
+	          ["time", startHuman],
+	          ["duration", durationHuman],
 	          ["price", info.event.extendedProps.price],
 	          ["bookings-remaining", bookingsRemaining],
 	        ].map(r => replaceForLesson(r[0], r[1]))
@@ -183,39 +194,63 @@ title: "Home"
   		    else 
   		        wait.innerHTML += "."
 	  		}, 250)
+	  		const clearAnimation = () => {
+	  			clearInterval(dotsSetInterval)
+	  			wait.innerHTML = ""
+	  			lessonBook.innerText = oldLessonBookText
+	  		}
 	  		// Save email
 	  		const email = emailInput.value
 	  		localStorage.setItem('email', email)
-	  		// Create a Stripe Session
-	     	fetch(
-      		"https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/setupNewBooking",
-      		{
-      			method: "POST",
-      			headers: { "Content-Type": "application/json" },
-      			body: JSON.stringify({
-    					id: document.getElementById("lesson-id").innerText,
-    					email: email
-      			})
-      	})
-        .then(response => {
-        	if (response.ok) {
-        		return response.json()
-        	} else {
-        		throw new Error("No OK response")
-        	}
-        })
-        .then(j => {
-        	stripe.redirectToCheckout({"sessionId": j.stripe_session_id})
-        })
-        .catch(err => {
-        	// Clear animation
-        	clearInterval(dotsSetInterval)
-        	document.getElementById("wait").innerHTML = ""
-        	lessonBook.innerText = oldLessonBookText
-        	//
-        	console.error(err)
-        	document.getElementById("booking-info").append("Impossible de mettre en place le paiement, veuillez rééssayer plus tard.")
-        })
+	  		if (window.vars.postponeMode) {
+		  		// Postpone
+		     	fetch(
+	      		f"https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/account/postpone?customerId={window.vars.customerId}&fromId={window.vars.lessonToPostponeId}&toId={window.vars.lessonId}",
+	      		{ method: "POST" }
+	      	)
+	        .then(response => {
+	        	if (response.ok) {
+	        		return response.json()
+	        	} else {
+	        		throw new Error("No OK response")
+	        	}
+	        })
+	        .then(j => {
+	        	stripe.redirectToCheckout({"sessionId": j.stripe_session_id})
+	        })
+	        .catch(err => {
+	        	clearAnimation()
+	        	console.error(err)
+	        	document.getElementById("booking-info").append("Impossible de reporter le cours, veuillez rééssayer plus tard.")
+	        })
+	  		} else {
+		  		// Create a Stripe Session
+		     	fetch(
+	      		"https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/setupNewBooking",
+	      		{
+	      			method: "POST",
+	      			headers: { "Content-Type": "application/json" },
+	      			body: JSON.stringify({
+	    					id: window.vars.lessonId,
+	    					email: email
+	      			})
+	      	})
+	        .then(response => {
+	        	if (response.ok) {
+	        		return response.json()
+	        	} else {
+	        		throw new Error("No OK response")
+	        	}
+	        })
+	        .then(j => {
+	        	stripe.redirectToCheckout({"sessionId": j.stripe_session_id})
+	        })
+	        .catch(err => {
+	        	clearAnimation()
+	        	console.error(err)
+	        	document.getElementById("booking-info").append("Impossible de mettre en place le paiement, veuillez rééssayer plus tard.")
+	        })
+	  		}
 	    })
 	  });
 	</script>

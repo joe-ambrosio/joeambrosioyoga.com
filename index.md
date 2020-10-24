@@ -103,6 +103,7 @@ title: "Home"
 	  	window.vars.postponeMode = true
 	  	window.vars.customerId = params.get("customerId")
 	  	window.vars.lessonToPostponeId = params.get("lessonToPostponeId")
+	  	window.vars.alreadyBookedLessons = params.get("alreadyBookedLessons").split(",")
 	    document.getElementById("postpone-mode").style.display = "block"
 	    document.querySelector("#lesson-book").innerHTML = "Reporter pour ce cours" + document.querySelector("#lesson-book").innerHTML.replace(/^[^<]+/, "")
 	  }
@@ -136,8 +137,8 @@ title: "Home"
 		  	}
 		  })
 		  .then(events => {
-		  	const filter = (window.vars.postponeMode) ? window.vars.lessonToPostponeId : ""
-		  	const filteredEvents = events.filter(e => e.id != filter)
+		  	const filter = (window.vars.postponeMode) ? window.vars.alreadyBookedLessons : []
+		  	const filteredEvents = events.filter(e => ! filter.includes(e.id))
 		  	calendar.addEventSource({
 		  		events: filteredEvents,
 		  		color: "#74503b",
@@ -199,7 +200,7 @@ title: "Home"
 	  		if (window.vars.postponeMode) {
 		  		// Postpone
 		     	fetch(
-	      		`https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/account/postpone?customerId=${window.vars.customerId}&fromId=${window.vars.lessonToPostponeId}&toId=${window.vars.lessonId}`,
+	      		`https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/account/postpone?customerId=${window.vars.customerId}&id=${window.vars.lessonToPostponeId}&newId=${window.vars.lessonId}`,
 	      		{ method: "POST" }
 	      	)
 	        .then(response => {

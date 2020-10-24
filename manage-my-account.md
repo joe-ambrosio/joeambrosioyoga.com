@@ -23,7 +23,7 @@ title: "Gérer mon compte"
 		<div>
 			<h3>Reporter ce cours</h3>
 			<p>Reporter gratuitement cette réservation sur le cours de votre choix. Recommandé si vous ne pouvez pas assister à ce cours mais voulez assister à un autre cours déjà planifié.</p>
-			<button data-href="/#postpone?customerId=%customerId%&lessonToPostponeId=%lessonToPostponeId%" data-onclick="redirect">Reporter<span class="wait"></span></button>
+			<button data-href="/#postpone?customerId=%customerId%&lessonToPostponeId=%lessonToPostponeId%&alreadyBookedLessons=%alreadyBookedLessons%" data-onclick="redirect">Reporter<span class="wait"></span></button>
 		</div>
 		<div>
 			<h3>Créditer mon compte</h3>
@@ -81,6 +81,10 @@ title: "Gérer mon compte"
 				  	document.getElementById("account-email").innerText = account.email
 				  	document.getElementById("account-balance").innerText = account.balance
 				  	document.getElementById("nb-future-bookings").innerText = account.bookings.length
+				  	const alreadyBookedLessons = []
+				  	for (booking of account.bookings) {
+				  		alreadyBookedLessons.push(booking.id)
+				  	}
 				  	for (booking of account.bookings) {
 				  		const {durationHuman, startHuman} = datetimeToFrenchDatetimeAndDuration(new Date(booking.start_datetime), new Date(booking.end_datetime))
 				  		let clone = document.querySelector('#booked-class-template').cloneNode(true)
@@ -92,6 +96,7 @@ title: "Gérer mon compte"
 				  		clone.querySelectorAll("button").forEach((el) => {
 				  			el.dataset.href = el.dataset.href.replace("%lessonToPostponeId%", booking.id)
 				  			el.dataset.href = el.dataset.href.replace("%customerId%", customerId)
+				  			el.dataset.href = el.dataset.href.replace("%alreadyBookedLessons%", alreadyBookedLessons.join(","))
 				  			el.addEventListener("click", clickOption)
 				  		})
 				  		document.querySelector('#content').appendChild(clone)

@@ -18,6 +18,21 @@
         const startHuman = `${dayNames[start.getDay() - 1]} ${start.getDate()} ${monthNames[start.getMonth()]} à ${start.getHours()}h${String(start.getMinutes()).padStart(2, '0')}`
         return {durationHuman, startHuman}
       }
+      function animateWaitElement(waitEl, button) {
+        const oldButtonText = button.innerText
+        button.disabled = true
+        const dotsSetInterval = setInterval(() => {
+          if (waitEl.innerHTML.length > 3 ) 
+              waitEl.innerHTML = ""
+          else 
+              waitEl.innerHTML += "."
+        }, 250)
+        return () => {
+          clearInterval(dotsSetInterval)
+          waitEl.innerHTML = ""
+          button.innerText = oldButtonText
+        }
+      }
     </script>
   </head>
   <body>

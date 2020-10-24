@@ -23,24 +23,49 @@ title: "Gérer mon compte"
 		<div>
 			<h3>Reporter ce cours</h3>
 			<p>Reporter gratuitement cette réservation sur le cours de votre choix. Recommandé si vous ne pouvez pas assister à ce cours mais voulez assister à un autre cours déjà planifié.</p>
-			<button data-href="/#postpone?customerId=%customerId%&lessonToPostponeId=%lessonToPostponeId%">Reporter<span id="wait"></span></button>
+			<button data-href="/#postpone?customerId=%customerId%&lessonToPostponeId=%lessonToPostponeId%" data-onclick="redirect">Reporter<span class="wait"></span></button>
 		</div>
 		<div>
 			<h3>Créditer mon compte</h3>
 			<p>Créditer la valeur de ce cours sur mon compte. La prochaine fois que je réserverais avec mon email je n'aurais pas à payer ce cours. Recommandé si vous ne pouvez pas assister à ce cours mais que vous n'êtes pas encore sûr de quand vous pourrez le rattraper.</p>
-			<button data-href="https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/account/credit?customerId=%customerId%&id=%lessonToPostponeId%">Créditer<span id="wait"></span></button>
+			<button data-href="https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/account/credit?customerId=%customerId%&id=%lessonToPostponeId%">Créditer<span class="wait"></span></button>
 		</div>
 		<div>
 			<h3>Demander un remboursement</h3>
 			<p>Me faire remboursser de la valeur de ce cours. Recommandé si vous ne pouvez pas assister à ce cours et que vous ne pensez pas reprendre un cours ici. Le rembourssement sera fera sur la carte bleu qui a servi au paiement sous 5 à 10 jours.</p>
-			<button data-href="https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/account/refund?customerId=%customerId%&id=%lessonToPostponeId%">Me faire rembourser<span id="wait"></span></button>
+			<button data-href="https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/account/refund?customerId=%customerId%&id=%lessonToPostponeId%">Me faire rembourser<span class="wait"></span></button>
 		</div>
 	</div>
 </div>
 
-
 <div>
 	<script>
+		function clickOption(event) {
+				clearAnimation = animateWaitElement(event.target.querySelector(".wait")[0], event.target)
+	  		if (event.target.dataset.onclick === "redirect") {
+	  			window.location.href = event.target.dataset.href
+	    	} else {
+		     	fetch(
+	      		event.target.dataset.href,
+	      		{ method: "POST" }
+		      	)
+		        .then(response => {
+		        	if (response.ok) {
+		        		return response.json()
+		        	} else {
+		        		throw new Error("No OK response")
+		        	}
+		        })
+		        .then(j => {
+		        	window.location.href = j.redirect_to
+		        })
+		        .catch(err => {
+		        	clearAnimation()
+		        	console.error(err)
+		        	document.getElementById("booking-info").append("Impossible d'effectuer cette opération, veuillez rééssayer plus tard.")
+		        })
+	    	}
+		}
 		document.addEventListener('DOMContentLoaded', function() {
 			if (window.location.hash) {
 				const customerId = window.location.hash.slice(1)
@@ -56,7 +81,6 @@ title: "Gérer mon compte"
 				  	document.getElementById("account-email").innerText = account.email
 				  	document.getElementById("account-balance").innerText = account.balance
 				  	document.getElementById("nb-future-bookings").innerText = account.bookings.length
-				  		console.log(account)
 				  	for (booking of account.bookings) {
 				  		const {durationHuman, startHuman} = datetimeToFrenchDatetimeAndDuration(new Date(booking.start_datetime), new Date(booking.end_datetime))
 				  		let clone = document.querySelector('#booked-class-template').cloneNode(true)
@@ -68,6 +92,7 @@ title: "Gérer mon compte"
 				  		clone.querySelectorAll("button").forEach((el) => {
 				  			el.dataset.href = el.dataset.href.replace("%lessonToPostponeId%", booking.id)
 				  			el.dataset.href = el.dataset.href.replace("%customerId%", customerId)
+				  			el.addEventListener("click", clickOption)
 				  		})
 				  		document.querySelector('#content').appendChild(clone)
 				  	}

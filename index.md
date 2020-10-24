@@ -98,13 +98,13 @@ title: "Home"
 	    document.getElementById("postpone-successful").style.display = "block"
 	  }
 	  // If postpone mode
-	  if (window.location.hash.startsWith("#postpone")) {
+	  if (window.location.hash.startsWith("#postpone?")) {
 	  	const params = new URLSearchParams(window.location.hash.slice(10))
 	  	window.vars.postponeMode = true
 	  	window.vars.customerId = params.get("customerId")
 	  	window.vars.lessonToPostponeId = params.get("lessonToPostponeId")
 	    document.getElementById("postpone-mode").style.display = "block"
-	    document.querySelector("#lesson-book").innerText = "Reporter pour ce cours"
+	    document.querySelector("#lesson-book").innerHTML = "Reporter pour ce cours" + document.querySelector("#lesson-book").innerHTML.replace(/^[^<]+/, "")
 	  }
 	  //
 	  document.addEventListener('DOMContentLoaded', function() {
@@ -192,20 +192,7 @@ title: "Home"
 	    // Handle modal submit button
 	  	document.getElementById('lesson-book').addEventListener("click", () => {
 	  		// Loading animation
-  		  const wait = document.getElementById("wait")
-	  		const oldLessonBookText = lessonBook.innerText
-	  		lessonBook.disabled = true
-	  		const dotsSetInterval = setInterval(() => {
-  		    if (wait.innerHTML.length > 3 ) 
-  		        wait.innerHTML = ""
-  		    else 
-  		        wait.innerHTML += "."
-	  		}, 250)
-	  		const clearAnimation = () => {
-	  			clearInterval(dotsSetInterval)
-	  			wait.innerHTML = ""
-	  			lessonBook.innerText = oldLessonBookText
-	  		}
+  		  clearAnimation = animateWaitElement(document.getElementById("wait"), lessonBook)
 	  		// Save email
 	  		const email = emailInput.value
 	  		localStorage.setItem('email', email)
@@ -217,7 +204,8 @@ title: "Home"
 	      	)
 	        .then(response => {
 	        	if (response.ok) {
-	        		window.location.href = "/#postpone-successful"
+	        		window.location.hash = "#postpone-successful"
+	        		window.location.reload()
 	        	} else {
 	        		throw new Error("No OK response")
 	        	}

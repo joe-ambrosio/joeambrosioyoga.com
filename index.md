@@ -11,7 +11,7 @@ title: "Home"
 	Cours reporté avec succès ! Vous allez reçevoir un email de confirmation. 
 </div>
 
-<div id="postmode-mode" class="infobox">
+<div id="postpone-mode" class="infobox">
 	Pour finaliser votre report de cours, veuillez sélectionner le nouveau cours qui vous convient. 
 </div>
 
@@ -103,7 +103,7 @@ title: "Home"
 	  	window.vars.postponeMode = true
 	  	window.vars.customerId = params.get("customerId")
 	  	window.vars.lessonToPostponeId = params.get("lessonToPostponeId")
-	    document.getElementById("postmode-mode").style.display = "block"
+	    document.getElementById("postpone-mode").style.display = "block"
 	    document.querySelector("#lesson-book").innerText = "Reporter pour ce cours"
 	  }
 	  //
@@ -212,7 +212,7 @@ title: "Home"
 	  		if (window.vars.postponeMode) {
 		  		// Postpone
 		     	fetch(
-	      		f"https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/account/postpone?customerId={window.vars.customerId}&fromId={window.vars.lessonToPostponeId}&toId={window.vars.lessonId}",
+	      		`https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/account/postpone?customerId=${window.vars.customerId}&fromId=${window.vars.lessonToPostponeId}&toId=${window.vars.lessonId}`,
 	      		{ method: "POST" }
 	      	)
 	        .then(response => {

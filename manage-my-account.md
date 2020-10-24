@@ -23,17 +23,17 @@ title: "Gérer mon compte"
 		<div>
 			<h3>Reporter ce cours</h3>
 			<p>Reporter gratuitement cette réservation sur le cours de votre choix. Recommandé si vous ne pouvez pas assister à ce cours mais voulez assister à un autre cours déjà planifié.</p>
-			<button data-href="/#postpone?customerId=%customerId%&lessonToPostponeId=%lessonToPostponeId%">Reporter</button>
+			<button data-href="/#postpone?customerId=%customerId%&lessonToPostponeId=%lessonToPostponeId%">Reporter<span id="wait"></span></button>
 		</div>
 		<div>
 			<h3>Créditer mon compte</h3>
 			<p>Créditer la valeur de ce cours sur mon compte. La prochaine fois que je réserverais avec mon email je n'aurais pas à payer ce cours. Recommandé si vous ne pouvez pas assister à ce cours mais que vous n'êtes pas encore sûr de quand vous pourrez le rattraper.</p>
-			<button data-href="https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/account/credit?customerId=%customerId%&id=%lessonToPostponeId%">Créditer</button>
+			<button data-href="https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/account/credit?customerId=%customerId%&id=%lessonToPostponeId%">Créditer<span id="wait"></span></button>
 		</div>
 		<div>
 			<h3>Demander un remboursement</h3>
 			<p>Me faire remboursser de la valeur de ce cours. Recommandé si vous ne pouvez pas assister à ce cours et que vous ne pensez pas reprendre un cours ici. Le rembourssement sera fera sur la carte bleu qui a servi au paiement sous 5 à 10 jours.</p>
-			<button data-href="https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/account/refund?customerId=%customerId%&id=%lessonToPostponeId%">Me faire rembourser</button>
+			<button data-href="https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/account/refund?customerId=%customerId%&id=%lessonToPostponeId%">Me faire rembourser<span id="wait"></span></button>
 		</div>
 	</div>
 </div>

@@ -3,8 +3,12 @@ layout: default
 title: "Home"
 ---
 
-<div id="payment-successful" class="infobox">
+<div id="payment-successful" class="infobox end-of-flow-success">
 	Merci pour votre réservation ! Vous allez recevoir un email de confirmation.
+</div>
+
+<div id="postpone-successful" class="infobox end-of-flow-success">
+	Cours reporté avec succès ! Vous allez reçevoir un email de confirmation. 
 </div>
 
 <div id="postmode-mode" class="infobox">
@@ -86,9 +90,12 @@ title: "Home"
 	  function replaceForLesson(name, text) {
 	    document.getElementById("lesson-" + name).innerText = text
 	  }
-	  // If end of payment flow
+	  // If end of flow
 	  if(window.location.hash == "#payment-successful") {
 	    document.getElementById("payment-successful").style.display = "block"
+	  }
+	  if(window.location.hash == "#postpone-successful") {
+	    document.getElementById("postpone-successful").style.display = "block"
 	  }
 	  // If postpone mode
 	  if (window.location.hash.startsWith("#postpone")) {
@@ -210,13 +217,10 @@ title: "Home"
 	      	)
 	        .then(response => {
 	        	if (response.ok) {
-	        		return response.json()
+	        		window.location.href = "/#postpone-successful"
 	        	} else {
 	        		throw new Error("No OK response")
 	        	}
-	        })
-	        .then(j => {
-	        	stripe.redirectToCheckout({"sessionId": j.stripe_session_id})
 	        })
 	        .catch(err => {
 	        	clearAnimation()

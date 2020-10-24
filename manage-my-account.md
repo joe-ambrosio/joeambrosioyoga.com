@@ -1,5 +1,6 @@
 ---
 layout: default
+title: "Gérer mon compte"
 ---
 
 <div class="infobox">

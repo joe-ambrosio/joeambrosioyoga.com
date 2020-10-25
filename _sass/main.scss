@@ -48,7 +48,7 @@ header {
 
 #content {
   width: 1000px;
-  margin: 120px auto;
+  margin: 90px auto;
   font-size: .95em;
   line-height: 1.2em;
 }
@@ -103,6 +103,31 @@ nav {
   border: 1px solid #000;
 }
 
+#v-posture-yoga  {
+    margin: -20px auto 70px;
+    display: block;
+    width: 738px;
+    border: 1px solid #9773535e;
+}
+
+#f-posture-yoga  {
+    display: block;
+    margin: 30px auto;
+    border: 1px solid #9773535e;
+}
+
+#about {
+  display: flex;
+  > * {
+    flex: 1;
+  }
+  #about-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 #payment-successful, 
 #payment-credit-successful,
 #refund-successful,
@@ -147,6 +172,7 @@ nav {
       font-size: 1.4em;
     }
     .fc-button {
+      width: unset;
       background-color: var(--fc-button-bg-color,#000);
       border: 0px;
       &.fc-today-button {
@@ -305,6 +331,17 @@ button {
       text-decoration: none;
       cursor: pointer;
     } 
+  }
+}
+
+#related {
+  font-size: .8em;
+  text-align: center;
+  color: gray;
+  margin: 60px 0 -80px;
+  a {
+    text-decoration: none;
+    color: gray;
   }
 }
 

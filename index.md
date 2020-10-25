@@ -44,7 +44,9 @@ title: "Home"
 		<br/>
 		Donc si le cœur vous en dit, on se retrouve juste ici ↴
 	</p>
+	<img id="v-posture-yoga" src="assets/v-posture-yoga.jpg"/>
 </div>
+
 
 <div id="book">
 	<div>

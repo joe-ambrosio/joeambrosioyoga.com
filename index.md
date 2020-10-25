@@ -15,6 +15,10 @@ title: "Home"
 	Cours crédité avec succès ! Le nouveau solde de votre compte est de <span class="new-balance"></span>€.
 </div>
 
+<div id="refund-successful" class="infobox end-of-flow-success">
+	Cours remboursé avec succès ! Le remboursement sera fera sur la carte bleu qui a servi au paiement sous 5 à 10 jours. 
+</div>
+
 <div id="postpone-successful" class="infobox end-of-flow-success">
 	Cours reporté avec succès ! Vous allez reçevoir un email de confirmation. 
 </div>
@@ -110,6 +114,9 @@ title: "Home"
 	  }
 	  else if (window.location.hash == "#postpone-successful") {
 	    document.getElementById("postpone-successful").style.display = "block"
+	  }
+	  else if (window.location.hash == "#refund-successful") {
+	    document.getElementById("refund-successful").style.display = "block"
 	  }
 	  else if (window.location.hash.startsWith("#credit-successful")) {
 	    document.getElementById("credit-successful").style.display = "block"

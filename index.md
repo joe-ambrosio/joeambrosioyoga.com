@@ -3,12 +3,16 @@ layout: default
 title: "Home"
 ---
 
+<div id="payment-credit-successful" class="infobox end-of-flow-success">
+	Merci pour votre réservation ! Vous avez réservé ce cours grace au solde de votre compte, merci de votre confiance. Le nouveau solde de votre compte est de <span class="new-balance"></span>€. Vous allez recevoir un email de confirmation.
+</div>
+
 <div id="payment-successful" class="infobox end-of-flow-success">
 	Merci pour votre réservation ! Vous allez recevoir un email de confirmation.
 </div>
 
 <div id="credit-successful" class="infobox end-of-flow-success">
-	Cours crédité avec succès ! Le nouveau solde de votre compte est de <span id="new-balance"></span>€.
+	Cours crédité avec succès ! Le nouveau solde de votre compte est de <span class="new-balance"></span>€.
 </div>
 
 <div id="postpone-successful" class="infobox end-of-flow-success">
@@ -98,12 +102,20 @@ title: "Home"
 	  if (window.location.hash == "#payment-successful") {
 	    document.getElementById("payment-successful").style.display = "block"
 	  }
-	  if (window.location.hash == "#postpone-successful") {
+	  else if (window.location.hash.startsWith("#payment-credit-successful")) {
+	    document.getElementById("payment-credit-successful").style.display = "block"
+	    document.querySelectorAll(".new-balance").forEach((el) => {
+	    	el.innerText = window.location.hash.split(":")[1]
+	    })
+	  }
+	  else if (window.location.hash == "#postpone-successful") {
 	    document.getElementById("postpone-successful").style.display = "block"
 	  }
-	  if (window.location.hash.startsWith("#credit-successful")) {
+	  else if (window.location.hash.startsWith("#credit-successful")) {
 	    document.getElementById("credit-successful").style.display = "block"
-	    document.getElementById("new-balance").innerText = window.location.hash.split(":")[1]
+	    document.querySelectorAll(".new-balance").forEach((el) => {
+	    	el.innerText = window.location.hash.split(":")[1]
+	    })
 	  }
 	  // If postpone mode
 	  if (window.location.hash.startsWith("#postpone?")) {
@@ -244,7 +256,12 @@ title: "Home"
 	        	}
 	        })
 	        .then(j => {
-	        	stripe.redirectToCheckout({"sessionId": j.stripe_session_id})
+	        	if (j.redirect_to_hash) {
+	        		window.location.hash = j.redirect_to_hash
+	        		window.location.reload()
+	        	} else {
+	        		stripe.redirectToCheckout({"sessionId": j.stripe_session_id})
+	        	}
 	        })
 	        .catch(err => {
 	        	clearAnimation()
@@ -253,6 +270,6 @@ title: "Home"
 	        })
 	  		}
 	    })
-	  });
+	  })
 	</script>
 </div>

@@ -103,7 +103,11 @@ nav {
   border: 1px solid #000;
 }
 
-#payment-successful, #credit-successful, #postpone-mode, #postpone-successful {
+#payment-successful, 
+#payment-credit-successful, 
+#credit-successful, 
+#postpone-mode, 
+#postpone-successful {
   padding: 35px 20px;
   text-align: center;
   display: none;

@@ -29,20 +29,20 @@ title: "Home"
 
 <div id="welcome" class="infobox">
 	<p>
-		Hey, bienvenue !
+		Hey, bienvenue ! 
 		<br/>
 		<br/>
-		Je m’appelle Joe, et je vous propose ici de découvrir, d’explorer ou d’approfondir votre connaissance du yoga. 
-		Le yoga est un chemin de découverte et de transformation. Il nous invite à explorer chaque partie de notre être : notre corps, notre respiration, nos pensées... Afin de les dépoussiérer, et de les laisser rayonner.
+		Je m’appelle Joe, et je vous propose ici de découvrir ou d’approfondir votre connaissance du yoga. 
+		Le yoga nous invite à explorer chaque partie de notre être : notre corps, notre respiration, notre mental... Dans le but de nous découvrir réellement. Il nous aide à dépoussiérer ces différents aspects de nous, afin de les laisser rayonner. 
 		<br/>
 		<br/>
-		Les asanas (postures) nous apprennent force, souplesse et légèreté du corps. En cherchant à les réaliser en conscience, nous développons aussi notre concentration et apaisons notre mental.
+		Les asanas (postures) nous apprennent force, souplesse et légèreté du corps. En cherchant à les réaliser en conscience, nous développons aussi notre concentration et apaisons notre mental. Lors de mes cours, j’aime aussi porter votre attention sur votre respiration, et accorder des temps de méditation, essentiels selon moi pour profiter pleinement des bienfaits de la pratique. 
 		<br/>
 		<br/>
-		Associé à pranayama (contrôle de la respiration) et dhyana (méditation), le yoga mène vers une profonde découverte de soi, et s’avère être un allié précieux pour notre vie quotidienne ! Dans chacun de mes cours, hatha ou vinyasa yoga, il me tient à cœur de vous proposer ces instants de méditation. 
+		Le yoga mène vers une profonde découverte de soi, et s’avère être un allié précieux pour notre vie quotidienne ! 
 		<br/>
 		<br/>
-		Donc si le cœur vous en dit, on se retrouve juste ici ↴
+		Donc si le cœur vous en dit, on se retrouve juste ici ! ↴
 	</p>
 	<img id="v-posture-yoga" src="assets/v-posture-yoga.jpg"/>
 </div>
@@ -53,7 +53,7 @@ title: "Home"
 		<h2>Réserver un cours</h2>
 		<div id='calendar'></div>
 	</div>
-	<p>Les cours proposés sont en live, disponibles via un lien zoom que vous recevrez par mail.<br/><br/><br/><br/>Durée : 1h15<br/>Tarif : 10€</p>
+	<p>Les cours proposés sont en live, disponibles via un lien zoom que vous recevrez par mail.<br/><br/>Votre réservation est flexible ! Vous pourrez reporter votre cours ou vous faire rembourser facilement.</p>
 </div>
 
 

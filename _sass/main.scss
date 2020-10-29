@@ -159,10 +159,10 @@ nav {
     padding: 40px;
   }
   > div {
-    flex: 75 75 0;
+    flex: 70 70 0;
   }
   > p {
-    flex: 25 25 0;
+    flex: 30 30 0;
   }
   #calendar {
     h2 {
@@ -353,12 +353,18 @@ button {
 }
 
 footer {
-  text-align: right;
   background: $background-color;
   padding: 15px;
   border-top: 1px solid #000;
   font-size: .7em;
   letter-spacing: .2em;
+  div {
+    display: inline;
+    text-align: right;
+  }
+  div:first-child {
+    text-align: left;
+  }
 }
 
 @media screen and (max-width: 1280px) {

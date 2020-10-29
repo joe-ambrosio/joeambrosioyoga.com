@@ -234,9 +234,9 @@ title: "Home"
 	      	)
 	        .then(response => {
 	        	if (response.ok) {
+	        		window.scrollTo({ top: 0, behavior: 'auto' })
 	        		window.location.hash = "#postpone-successful"
 	        		window.location.reload()
-	        		window.scrollTo({ top: 0, behavior: 'smooth' })
 	        	} else {
 	        		throw new Error("No OK response")
 	        	}
@@ -267,9 +267,9 @@ title: "Home"
 	        })
 	        .then(j => {
 	        	if (j.redirect_to_hash) {
+	        		window.scrollTo({ top: 0, behavior: 'auto' })
 	        		window.location.hash = j.redirect_to_hash
 	        		window.location.reload()
-	        		window.scrollTo({ top: 0, behavior: 'smooth' })
 	        	} else {
 	        		stripe.redirectToCheckout({"sessionId": j.stripe_session_id})
 	        	}

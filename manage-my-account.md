@@ -3,11 +3,12 @@ layout: default
 title: "Gérer mon compte"
 ---
 
-<div class="infobox">
+<div class="infobox" id="my-account-summary">
 	<p>
-	Mon email : <span id="account-email"></span><br/>
-	Solde de votre compte : <span id="account-balance"></span>€<br/>
-	Nombre de cours réservés à venir : <span id="nb-future-bookings"></span>
+		Mon email : <span id="account-email"></span><br/>
+		Solde de votre compte : <span id="account-balance"></span>€<br/>
+		Nombre de cours réservés à venir : <span id="nb-future-bookings"></span><br/><br/>
+		<a href="/">Réserver votre prochain cours</a>
 	</p>
 </div>
 
@@ -27,12 +28,12 @@ title: "Gérer mon compte"
 		</div>
 		<div>
 			<h3>Créditer mon compte</h3>
-			<p>Créditer la valeur de ce cours sur mon compte. La prochaine fois que je réserverais avec mon email je n'aurais pas à payer ce cours. Recommandé si vous ne pouvez pas assister à ce cours mais que vous n'êtes pas encore sûr de quand vous pourrez le rattraper.</p>
+			<p>Créditer la valeur de ce cours sur mon compte. La prochaine fois que je réserverai avec mon email je n'aurai pas à payer. Recommandé si vous ne pouvez pas assister à ce cours mais que vous n'êtes pas encore sûr de quand vous pourrez le rattraper.</p>
 			<button data-href="https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/account/credit?customerId=%customerId%&id=%currentLessonId%">Créditer<span class="wait"></span></button>
 		</div>
 		<div>
 			<h3>Demander un remboursement</h3>
-			<p>Me faire remboursser de la valeur de ce cours. Recommandé si vous ne pouvez pas assister à ce cours et que vous ne pensez pas reprendre un cours ici. Le remboursement sera fera sur la carte bleu qui a servi au paiement sous 5 à 10 jours.</p>
+			<p>Me faire rembourser de la valeur de ce cours. Recommandé si vous ne pouvez pas assister à ce cours et que vous ne pensez pas reprendre un cours avec moi. Le remboursement se fera sur la carte bleue qui a servi au paiement sous 5 à 10 jours.</p>
 			<button data-href="https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/account/refund?customerId=%customerId%&id=%currentLessonId%">Me faire rembourser<span class="wait"></span></button>
 		</div>
 	</div>

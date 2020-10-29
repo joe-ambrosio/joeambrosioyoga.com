@@ -4,7 +4,7 @@ title: "Home"
 ---
 
 <div id="payment-credit-successful" class="infobox end-of-flow-success">
-	Merci pour votre réservation ! Vous avez réservé ce cours grace au solde de votre compte, merci de votre confiance. Le nouveau solde de votre compte est de <span class="new-balance"></span>€. Vous allez recevoir un email de confirmation.
+	Merci pour votre réservation ! Vous avez réservé ce cours grâce au solde de votre compte. Le nouveau solde de votre compte est de <span class="new-balance"></span>€. Vous allez recevoir un email de confirmation.
 </div>
 
 <div id="payment-successful" class="infobox end-of-flow-success">
@@ -16,7 +16,7 @@ title: "Home"
 </div>
 
 <div id="refund-successful" class="infobox end-of-flow-success">
-	Cours remboursé avec succès ! Le remboursement sera fera sur la carte bleu qui a servi au paiement sous 5 à 10 jours. 
+	Cours remboursé avec succès ! Le remboursement se fera sur la carte bleue qui a servi au paiement sous 5 à 10 jours. 
 </div>
 
 <div id="postpone-successful" class="infobox end-of-flow-success">
@@ -236,6 +236,7 @@ title: "Home"
 	        	if (response.ok) {
 	        		window.location.hash = "#postpone-successful"
 	        		window.location.reload()
+	        		window.scrollTo({ top: 0, behavior: 'smooth' })
 	        	} else {
 	        		throw new Error("No OK response")
 	        	}
@@ -268,6 +269,7 @@ title: "Home"
 	        	if (j.redirect_to_hash) {
 	        		window.location.hash = j.redirect_to_hash
 	        		window.location.reload()
+	        		window.scrollTo({ top: 0, behavior: 'smooth' })
 	        	} else {
 	        		stripe.redirectToCheckout({"sessionId": j.stripe_session_id})
 	        	}

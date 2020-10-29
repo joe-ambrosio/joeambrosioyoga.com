@@ -83,7 +83,7 @@ title: "Home"
     	</p>
     </div>
     <div class="booking" id="booking-info">
-    	<p>Merci de remplir une addresse email valide, vous recevrez sur cette addresse toutes les informations pour vous connecter au cours.</p>
+    	<p>Merci de remplir une adresse email valide, vous recevrez sur cette adresse toutes les informations pour vous connecter au cours.</p>
     	<input type="email" name="email" placeholder="jekiffeleyoga@gmail.com" id="email" />
     	<button id="lesson-book" disabled="disabled" type="submit">Continuer vers le paiement<span id="wait"></span></button>
     </div>

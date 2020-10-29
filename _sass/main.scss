@@ -314,6 +314,9 @@ button {
     #lesson-id {
       display: none;
     }
+    #lesson-time:first-letter {
+        text-transform: uppercase;
+    }
     #lesson-warning{
       font-style: italic;
     }

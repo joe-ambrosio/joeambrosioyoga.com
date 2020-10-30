@@ -42,8 +42,13 @@ header {
   margin-bottom: -20px;
 }
 
+@supports not (-webkit-touch-callout: none) {
+  #page {
+      display: flex; 
+  }
+}
+
 #page {
-  display: flex; 
   flex-direction: column;
   height: 100vh;
   margin: 0 auto;

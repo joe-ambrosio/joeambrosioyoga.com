@@ -45,6 +45,7 @@ title: "Gérer mon compte"
 	  		if (event.target.dataset.onclick === "redirect") {
 	  			window.location.href = event.target.dataset.href
 	    	} else {
+	    		clearAnimation = animateWaitElement(event.target.querySelector("span"), event.target)
 		     	fetch(
 	      		event.target.dataset.href,
 	      		{ method: "POST" }
@@ -60,8 +61,9 @@ title: "Gérer mon compte"
 		        	window.location.href = j.redirect_to
 		        })
 		        .catch(err => {
+		        	clearAnimation()
 		        	console.error(err)
-		        	document.getElementById("booking-info").append("Impossible d'effectuer cette opération, veuillez rééssayer plus tard.")
+		        	event.target.parentNode.parentNode.parentNode.append("Impossible d'effectuer cette opération, veuillez rééssayer plus tard.")
 		        })
 	    	}
 		}

@@ -3,7 +3,7 @@ $background-color: #fffcf5;;
 body {
   margin: 0;
   background: url('/assets/back.jpg');
-  background-size: cover;
+  background-size: auto;
   font-family: raleway, sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -43,6 +43,9 @@ header {
 }
 
 #page {
+  display: flex; 
+  flex-direction: column;
+  height: 100vh;
   margin: 0 auto;
 }
 
@@ -353,18 +356,14 @@ button {
 }
 
 footer {
+  margin-top:auto;
   background: $background-color;
   padding: 15px;
   border-top: 1px solid #000;
   font-size: .7em;
   letter-spacing: .2em;
-  div {
-    display: inline;
-    text-align: right;
-  }
-  div:first-child {
-    text-align: left;
-  }
+  display: flex;
+  justify-content: space-between;
 }
 
 @media screen and (max-width: 1280px) {

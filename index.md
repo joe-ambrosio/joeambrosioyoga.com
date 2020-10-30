@@ -99,6 +99,7 @@ title: "Home"
 	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.js" integrity="sha256-mMw9aRRFx9TK/L0dn25GKxH/WH7rtFTp+P9Uma+2+zc=" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
 	<script>
+	  document.addEventListener('DOMContentLoaded', function() {
 		// Utils
 		window.vars = {postponeMode: false}
 	  function replaceForLesson(name, text) {
@@ -127,29 +128,31 @@ title: "Home"
 	    })
 	  }
 	  // If postpone mode
+          const emailInput = document.getElementById('email')
 	  if (window.location.hash.startsWith("#postpone?")) {
 	  	const params = new URLSearchParams(window.location.hash.slice(10))
 	  	window.vars.postponeMode = true
+                emailInput.value = params.get("customerEmail")
+                emailInput.disabled = true
 	  	window.vars.customerId = params.get("customerId")
 	  	window.vars.lessonToPostponeId = params.get("lessonToPostponeId")
 	  	window.vars.alreadyBookedLessons = params.get("alreadyBookedLessons").split(",")
 	    document.getElementById("postpone-mode").style.display = "block"
 	    document.querySelector("#lesson-book").innerHTML = "Reporter pour ce cours" + document.querySelector("#lesson-book").innerHTML.replace(/^[^<]+/, "")
 	  }
-	  //
-	  document.addEventListener('DOMContentLoaded', function() {
 	    // Vars
 	    const modal = document.getElementById("modal")
-			const emailInput = document.getElementById('email')
 	    const calendarEl = document.getElementById('calendar');
 	    const lessonBook = document.getElementById("lesson-book")
 	    const reEmail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
 	    const stripe = Stripe('pk_test_q23TkZKgp8unr6VHj80CFF4F00XhYwquMh');
+            if (!window.vars.postponeMode) {
 			// Restore previous email inputed
 			const previousEmail = localStorage.getItem('email')
 			if (previousEmail) {
 				emailInput.value = previousEmail
 			}
+            }
 		  // Modal handling
 	    closeModal = () => modal.style.display = "none"
 	    document.getElementById("close-modal").addEventListener("click", closeModal)

@@ -42,7 +42,6 @@ title: "Gérer mon compte"
 <div>
 	<script>
 		function clickOption(event) {
-				clearAnimation = animateWaitElement(event.target.querySelector(".wait")[0], event.target)
 	  		if (event.target.dataset.onclick === "redirect") {
 	  			window.location.href = event.target.dataset.href
 	    	} else {
@@ -61,7 +60,6 @@ title: "Gérer mon compte"
 		        	window.location.href = j.redirect_to
 		        })
 		        .catch(err => {
-		        	clearAnimation()
 		        	console.error(err)
 		        	document.getElementById("booking-info").append("Impossible d'effectuer cette opération, veuillez rééssayer plus tard.")
 		        })

@@ -160,7 +160,7 @@ title: "Home"
 	      event.target == modal && closeModal()
 	    })
 			// Fetch events
-	  	fetch('https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/events.json')
+	  	fetch('{{site.apiBaseUrl}}/events.json')
 		  .then(response => {
 		  	if (response.ok) {
 		  		return response.json()
@@ -232,7 +232,7 @@ title: "Home"
 	  		if (window.vars.postponeMode) {
 		  		// Postpone
 		     	fetch(
-	      		`https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/account/postpone?customerId=${window.vars.customerId}&id=${window.vars.lessonToPostponeId}&newId=${window.vars.lessonId}`,
+	      		`{{site.apiBaseUrl}}/account/postpone?customerId=${window.vars.customerId}&id=${window.vars.lessonToPostponeId}&newId=${window.vars.lessonId}`,
 	      		{ method: "POST" }
 	      	)
 	        .then(response => {
@@ -252,7 +252,7 @@ title: "Home"
 	  		} else {
 		  		// Create a Stripe Session
 		     	fetch(
-	      		"https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/setupNewBooking",
+	      		"{{site.apiBaseUrl}}/setupNewBooking",
 	      		{
 	      			method: "POST",
 	      			headers: { "Content-Type": "application/json" },

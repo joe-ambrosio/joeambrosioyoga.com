@@ -29,12 +29,12 @@ title: "Gérer mon compte"
 		<div>
 			<h3>Créditer mon compte</h3>
 			<p>Créditer la valeur de ce cours sur mon compte. La prochaine fois que je réserverai avec mon email je n'aurai pas à payer. Recommandé si vous ne pouvez pas assister à ce cours mais que vous n'êtes pas encore sûr de quand vous pourrez le rattraper.</p>
-			<button data-href="https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/account/credit?customerId=%customerId%&id=%currentLessonId%">Créditer<span class="wait"></span></button>
+			<button data-href="{{site.apiBaseUrl}}/account/credit?customerId=%customerId%&id=%currentLessonId%">Créditer<span class="wait"></span></button>
 		</div>
 		<div>
 			<h3>Demander un remboursement</h3>
 			<p>Me faire rembourser de la valeur de ce cours. Recommandé si vous ne pouvez pas assister à ce cours et que vous ne pensez pas reprendre un cours avec moi. Le remboursement se fera sur la carte bleue qui a servi au paiement sous 5 à 10 jours.</p>
-			<button data-href="https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/account/refund?customerId=%customerId%&id=%currentLessonId%">Me faire rembourser<span class="wait"></span></button>
+			<button data-href="{{site.apiBaseUrl}}/account/refund?customerId=%customerId%&id=%currentLessonId%">Me faire rembourser<span class="wait"></span></button>
 		</div>
 	</div>
 </div>
@@ -68,7 +68,7 @@ title: "Gérer mon compte"
 		document.addEventListener('DOMContentLoaded', function() {
 			if (window.location.hash) {
 				const customerId = window.location.hash.slice(1)
-			  	fetch('https://ga09zolgt2.execute-api.eu-west-3.amazonaws.com/account?customerId=' + customerId)
+			  	fetch('{{site.apiBaseUrl}}/account?customerId=' + customerId)
 				  .then(response => {
 				  	if (response.ok) {
 				  		return response.json()

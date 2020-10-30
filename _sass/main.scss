@@ -115,6 +115,7 @@ nav {
 
 #f-posture-yoga  {
     display: block;
+    width: 100%;
     margin: 30px auto;
     border: 1px solid #9773535e;
 }
@@ -373,35 +374,51 @@ footer {
   #content {
     width: 75%;
   }
-  /*nav {
-    padding: 5px
+  p {
+    padding: 45px;
   }
-  nav ul  {
-    flex-direction: column
-  }
-  img.small {
-    display: inline;
-  }
-  img.large {
-    display: none;
-  }*/
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1023px) {
+  #content {
+    width: 100%;
+    margin: 50px auto;
+  }
+  #v-posture-yoga {
+    width: 100%;
+    margin: -10px auto 20px;
+  }
+  #f-posture-yoga {
+      width: 80%;
+  }
+  #book, #yoga-types-info, #modal > div, #about {
+    flex-direction: column;
+  }
+  footer {
+    font-size: .5em;
+  }
+  p {
+    padding: 10px;
+  }
   #book #calendar .fc-col-header-cell-cushion {
     padding: 6px 4px;
   }
-}
-
-/*@media screen and (max-width: 750px) {
-  .accommodation {
-    flex-direction: column;
-    &:nth-child(even) :nth-child(1) {
-      order: 0;
-    }
-    div:nth-child(1) {
-      margin: 0 auto !important;
-    }
+  #book, #yoga-types-info {
+    margin: unset;
+  }
+  #book > *, #yoga-types-info > div, .infobox {
+    border-left: unset;
+    border-right: unset;
+    margin: 0px;
+    padding: 30px;
+  }
+  #book > div, #modal > div {
+    padding: 15px;
+  }
+  #book > *, #yoga-types-info > :first-child, .end-of-flow-success {
+    margin-bottom: 30px;
+  }
+  #instagram-logo {
+    width: 25px;
   }
 }
-*/

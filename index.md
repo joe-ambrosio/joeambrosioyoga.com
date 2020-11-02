@@ -33,10 +33,15 @@ title: "Home"
 		<br/>
 		<br/>
 		Je m’appelle Joe, et je vous propose ici de découvrir ou d’approfondir votre connaissance du yoga. 
+		<br/>
+		<br/>
 		Le yoga nous invite à explorer chaque partie de notre être : notre corps, notre respiration, notre mental... Dans le but de nous découvrir réellement. Il nous aide à dépoussiérer ces différents aspects de nous, afin de les laisser rayonner. 
 		<br/>
 		<br/>
-		Les asanas (postures) nous apprennent force, souplesse et légèreté du corps. En cherchant à les réaliser en conscience, nous développons aussi notre concentration et apaisons notre mental. Lors de mes cours, j’aime aussi porter votre attention sur votre respiration, et accorder des temps de méditation, essentiels selon moi pour profiter pleinement des bienfaits de la pratique. 
+		Les asanas (postures) nous apprennent force, souplesse et légèreté du corps. En cherchant à les réaliser en conscience, nous développons aussi notre concentration et apaisons notre mental.
+		<br/>
+		<br/>
+                Lors de mes cours, j’aime aussi porter votre attention sur votre respiration, et accorder des temps de méditation, essentiels selon moi pour profiter pleinement des bienfaits de la pratique. 
 		<br/>
 		<br/>
 		Le yoga mène vers une profonde découverte de soi, et s’avère être un allié précieux pour notre vie quotidienne ! 

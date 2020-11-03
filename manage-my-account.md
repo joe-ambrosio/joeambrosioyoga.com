@@ -45,8 +45,14 @@ noindex: 1
 	<script>
 		function clickOption(event) {
 	  		if (event.target.dataset.onclick === "redirect") {
+          amplitude.getInstance().logEvent('clickPostponeOption', {href: event.target.dataset.href})
 	  			window.location.href = event.target.dataset.href
 	    	} else {
+          if (event.target.dataset.href.includes("/credit")) {
+            amplitude.getInstance().logEvent('clickCreditOption', {href: event.target.dataset.href})
+          } else {
+            amplitude.getInstance().logEvent('clickRefundOption', {href: event.target.dataset.href})
+          }
 	    		clearAnimation = animateWaitElement(event.target.querySelector("span"), event.target)
 		     	fetch(
 	      		event.target.dataset.href,
@@ -66,6 +72,7 @@ noindex: 1
 		        	clearAnimation()
 		        	console.error(err)
 		        	event.target.parentNode.parentNode.parentNode.append("Impossible d'effectuer cette opération, veuillez rééssayer plus tard.")
+            amplitude.getInstance().logEvent('errClickOption', {err: String(err)})
 		        })
 	    	}
 		}
@@ -82,6 +89,7 @@ noindex: 1
 				  })
 				  .then(account => {
 				  	document.getElementById("account-email").innerText = account.email
+            amplitude.getInstance().setUserId(account.email)
 				  	document.getElementById("account-balance").innerText = account.balance
 				  	document.getElementById("nb-future-bookings").innerText = account.bookings.length
 				  	const alreadyBookedLessons = []
@@ -109,6 +117,7 @@ noindex: 1
 				  .catch(err => {
 				  	console.error(err)
 				  	document.querySelectorAll('.infobox p')[0].innerText = "Impossible de récupérer les informations de votre compte, revenez plus tard."
+            amplitude.getInstance().logEvent('errGetCustomerAccount', {err: String(err)})
 				  })
 			}
 		})

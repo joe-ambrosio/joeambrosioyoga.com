@@ -139,6 +139,7 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 	  	const params = new URLSearchParams(window.location.hash.slice(10))
 	  	window.vars.postponeMode = true
                 emailInput.value = params.get("customerEmail")
+                amplitude.getInstance().setUserId(params.get("customerEmail"))
                 emailInput.disabled = true
 	  	window.vars.customerId = params.get("customerId")
 	  	window.vars.lessonToPostponeId = params.get("lessonToPostponeId")
@@ -157,10 +158,11 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 			const previousEmail = localStorage.getItem('email')
 			if (previousEmail) {
 				emailInput.value = previousEmail
+                                amplitude.getInstance().setUserId(previousEmail)
 			}
             }
 		  // Modal handling
-	    closeModal = () => modal.style.display = "none"
+	    closeModal = () => { modal.style.display = "none"; amplitude.getInstance().logEvent('closeModal') }
 	    document.getElementById("close-modal").addEventListener("click", closeModal)
 	    window.addEventListener("click", (event) => {
 	      event.target == modal && closeModal()
@@ -186,6 +188,7 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 		  .catch(err => {
 		  	console.error(err)
 		  	calendarEl.prepend("Impossible de récupérer les cours actuellement, revenez plus tard.")
+        amplitude.getInstance().logEvent('errGetEvents', {err: String(err)})
 		  })
 	    // Validate email in real time
 	  	emailInput.addEventListener("input", (event) => {
@@ -208,6 +211,10 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 	        meridiem: false
 	      },
 	      height: "auto",
+              viewDidMount: (view, el) => {
+                amplitude.getInstance().logEvent('changeCalendarView', {range: view.title})
+
+              },
 	      eventClick: (info) => {
 	      	// Populate the modal
 	      	const {durationHuman, startHuman} = datetimeToFrenchDatetimeAndDuration(info.event.start, info.event.end)
@@ -215,6 +222,7 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 	        document.getElementById("booking-info").style.display = (bookingsRemaining > 0) ? "block" : "none"
 	        document.getElementById("booking-full").style.display = (bookingsRemaining > 0) ? "none" : "block"
 	        window.vars.lessonId = info.event.id
+                amplitude.getInstance().logEvent('clickEvent', {id: info.event.id, name: `${info.event.extendedProps.long_title} ${startHuman}`})
 	        ;[
 	          ["title", info.event.extendedProps.long_title],
 	          ["description", info.event.extendedProps.description],
@@ -225,6 +233,7 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 	        ].map(r => replaceForLesson(r[0], r[1]))
 	        // Diplay it
 	        modal.style.display = "flex"
+          amplitude.getInstance().logEvent('openModal')
 	      }
 	    })
 	    calendar.render()
@@ -235,8 +244,10 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 	  		// Save email
 	  		const email = emailInput.value
 	  		localStorage.setItem('email', email)
+        amplitude.getInstance().setUserId(email)
 	  		if (window.vars.postponeMode) {
 		  		// Postpone
+          amplitude.getInstance().logEvent('clickPostpone', {id: window.vars.lessonToPostponeId, newId: window.vars.lessonId})
 		     	fetch(
 	      		`{{site.apiBaseUrl}}/account/postpone?customerId=${window.vars.customerId}&id=${window.vars.lessonToPostponeId}&newId=${window.vars.lessonId}`,
 	      		{ method: "POST" }
@@ -254,9 +265,11 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 	        	clearAnimation()
 	        	console.error(err)
 	        	document.getElementById("booking-info").append("Impossible de reporter le cours, veuillez rééssayer plus tard.")
+            amplitude.getInstance().logEvent('errPostpone', {err: String(err)})
 	        })
 	  		} else {
 		  		// Create a Stripe Session
+          amplitude.getInstance().logEvent('clickBook', {id: window.vars.lessonId})
 		     	fetch(
 	      		"{{site.apiBaseUrl}}/setupNewBooking",
 	      		{
@@ -287,6 +300,7 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 	        	clearAnimation()
 	        	console.error(err)
 	        	document.getElementById("booking-info").append("Impossible de mettre en place le paiement, veuillez rééssayer plus tard.")
+            amplitude.getInstance().logEvent('errBook', {err: String(err)})
 	        })
 	  		}
 	    })

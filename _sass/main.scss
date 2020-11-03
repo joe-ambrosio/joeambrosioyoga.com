@@ -399,7 +399,7 @@ footer {
   #f-posture-yoga {
       width: 80%;
   }
-  #book, #yoga-types-info, #modal > div, #about {
+  #book, #yoga-types-info, #modal > div, #about, .booked-class-options {
     flex-direction: column;
   }
   footer {
@@ -429,10 +429,14 @@ footer {
       text-align: center;
     }
   }
+  .booked-class-options h3 {
+    margin: 30px 0px 0px;
+    text-align: center;
+  }
   #modal > div {
     padding: 15px;
   }
-  #book > *, #yoga-types-info > :first-child, .end-of-flow-success {
+  #book > *, #yoga-types-info > :first-child, .end-of-flow-success, #postpone-mode, #my-account-summary, .booked-class {
     margin-bottom: 30px;
   }
   #instagram-logo {

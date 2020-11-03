@@ -85,7 +85,7 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
     		Durée : <span id="lesson-duration"></span><br/>
     		Places disponibles : <span id="lesson-bookings-remaining"></span>
     		<p id="lesson-description"></p>
-    		<p id="lesson-warning">Cours non adapté aux femmes enceintes.</p>
+    		<p id="lesson-warning">Tous niveaux.<br/>Cours non adapté aux femmes enceintes.</p>
     	</p>
     </div>
     <div class="booking" id="booking-info">

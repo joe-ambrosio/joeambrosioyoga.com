@@ -7,7 +7,7 @@ description: "Pratiquante et passionnée depuis des années, c’est en Indonés
 <div id="about" class="infobox">
 	<div id="about-text">
 		<div>
-			<h2>{{page.title}}</h2>
+			<h2>À propos</h2>
 			<p>
 				Pratiquante et passionnée depuis des années, c’est en Indonésie que je me forme au Hatha et Vinyasa yoga, dans le respect des traditions yogiques. Le yoga a changé ma façon de vivre, et depuis mon retour, c’est avec bonheur que je transmets mes cours et mes conseils.
 				<br/>

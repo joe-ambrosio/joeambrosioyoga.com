@@ -102,8 +102,8 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 
 
 <div>
-	<script src="https://js.stripe.com/v3"></script>
-	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.js" integrity="sha256-mMw9aRRFx9TK/L0dn25GKxH/WH7rtFTp+P9Uma+2+zc=" crossorigin="anonymous"></script>
+	<script defer src="https://js.stripe.com/v3"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.js" integrity="sha256-mMw9aRRFx9TK/L0dn25GKxH/WH7rtFTp+P9Uma+2+zc=" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
 	<script>
 	  document.addEventListener('DOMContentLoaded', function() {

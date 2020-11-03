@@ -9,10 +9,18 @@
     {% if page.noindex == "1" %}
     <meta name="robots" content="noindex">
     {% endif %}
-    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
     <link rel="stylesheet" href="https://use.typekit.net/cqf7yal.css">
 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8PDDH55N3V"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-8PDDH55N3V');
+    </script>
     <script type="text/javascript">
       function datetimeToFrenchDatetimeAndDuration(start, end) {
         const durationMs = end - start

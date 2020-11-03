@@ -114,24 +114,29 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 	  // If end of flow
 	  if (window.location.hash == "#payment-successful") {
 	    document.getElementById("payment-successful").style.display = "block"
+      amplitude.getInstance().logEvent('paymentSuccessful')
 	  }
 	  else if (window.location.hash.startsWith("#payment-credit-successful")) {
 	    document.getElementById("payment-credit-successful").style.display = "block"
 	    document.querySelectorAll(".new-balance").forEach((el) => {
 	    	el.innerText = window.location.hash.split(":")[1]
 	    })
+      amplitude.getInstance().logEvent('paymentCreditSuccessful')
 	  }
 	  else if (window.location.hash == "#postpone-successful") {
 	    document.getElementById("postpone-successful").style.display = "block"
+      amplitude.getInstance().logEvent('postponeSuccessful')
 	  }
 	  else if (window.location.hash == "#refund-successful") {
 	    document.getElementById("refund-successful").style.display = "block"
+      amplitude.getInstance().logEvent('refundSuccessful')
 	  }
 	  else if (window.location.hash.startsWith("#credit-successful")) {
 	    document.getElementById("credit-successful").style.display = "block"
 	    document.querySelectorAll(".new-balance").forEach((el) => {
 	    	el.innerText = window.location.hash.split(":")[1]
 	    })
+      amplitude.getInstance().logEvent('creditSuccessful')
 	  }
 	  // If postpone mode
           const emailInput = document.getElementById('email')

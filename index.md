@@ -196,6 +196,7 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 	    })
 	    emailInput.dispatchEvent(new Event("input"))
 	    // Init FullCalendar
+      let firstRender = true
 	    const calendar = new FullCalendar.Calendar(calendarEl, {
 	      initialView: 'dayGridWeek',
 	      titleFormat: { day: 'numeric', month: 'short' },
@@ -211,9 +212,12 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 	        meridiem: false
 	      },
 	      height: "auto",
-              viewDidMount: (view, el) => {
-                amplitude.getInstance().logEvent('changeCalendarView', {range: view.title})
-
+              datesSet: (dateInfo) => {
+                if (firstRender) {
+                  firstRender = false
+                } else {
+                  amplitude.getInstance().logEvent('changeCalendarView', {range: dateInfo.view.title})
+                }
               },
 	      eventClick: (info) => {
 	      	// Populate the modal

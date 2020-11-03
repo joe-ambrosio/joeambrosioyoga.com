@@ -150,7 +150,7 @@ title: "Home"
 	    const calendarEl = document.getElementById('calendar');
 	    const lessonBook = document.getElementById("lesson-book")
 	    const reEmail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
-	    const stripe = Stripe('pk_test_q23TkZKgp8unr6VHj80CFF4F00XhYwquMh');
+	    const stripe = Stripe('pk_live_Pn9Hu57ZG2cuRQ0eplC3KcEl00mgnX2Bfg');
             if (!window.vars.postponeMode) {
 			// Restore previous email inputed
 			const previousEmail = localStorage.getItem('email')

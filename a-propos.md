@@ -1,6 +1,7 @@
 ---
 layout: default
-title: "A Propos"
+title: "À propos - "
+description: "Pratiquante et passionnée depuis des années, c’est en Indonésie que je me forme au Hatha et Vinyasa yoga, dans le respect des traditions yogiques."
 ---
 
 <div id="about" class="infobox">

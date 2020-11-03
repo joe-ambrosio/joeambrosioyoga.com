@@ -1,6 +1,8 @@
 ---
 layout: default
-title: "Gérer mon compte"
+title: "Gérer mon compte - "
+description: "Gérer mon compte"
+noindex: 1
 ---
 
 <div class="infobox" id="my-account-summary">

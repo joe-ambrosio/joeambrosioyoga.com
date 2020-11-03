@@ -1,6 +1,7 @@
 ---
 layout: default
-title: "Home"
+title: ""
+description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de découvrir ou d’approfondir votre connaissance du yoga."
 ---
 
 <div id="payment-credit-successful" class="infobox end-of-flow-success">

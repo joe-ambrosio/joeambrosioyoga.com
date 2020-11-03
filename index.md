@@ -16,7 +16,7 @@ title: "Home"
 </div>
 
 <div id="refund-successful" class="infobox end-of-flow-success">
-	Cours remboursé avec succès ! Le remboursement se fera sur la carte bleue qui a servi au paiement sous 5 à 10 jours. 
+	Cours remboursé avec succès ! Le remboursement se fera sur la carte bleue qui a servi au paiement sous 5 à 10 jours. Vous allez recevoir un email de confirmation.
 </div>
 
 <div id="postpone-successful" class="infobox end-of-flow-success">

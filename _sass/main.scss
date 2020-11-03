@@ -172,6 +172,11 @@ nav {
   }
   > div {
     flex: 70 70 0;
+    p {
+      padding: 0px;
+      margin: 10px 0px -25px;
+      font-style: italic;
+    }
   }
   > p {
     flex: 30 30 0;
@@ -430,6 +435,10 @@ footer {
   #book > div {
     padding: 5px;
     & > h2 {
+      text-align: center;
+    }
+    p {
+      margin: 10px 0px;
       text-align: center;
     }
   }

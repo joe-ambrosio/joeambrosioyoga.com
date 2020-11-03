@@ -58,6 +58,7 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 	<div>
 		<h2>Réserver un cours</h2>
 		<div id='calendar'></div>
+                <p>Cliquez sur la séance de votre choix.</p>
 	</div>
 	<p>Les cours proposés sont en live, disponibles via un lien Zoom que vous recevrez par mail.<br/><br/>Votre réservation est :<br/><br/>- Flexible : vous pouvez reporter votre cours ou vous faire rembourser facilement.<br/>- Rapide : pas de création de compte, la réservation est liée à votre adresse email.</p>
 </div>

@@ -253,7 +253,7 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 	        ].map(r => replaceForLesson(r[0], r[1]))
           if (window.vars.postponeMode) {
             lessonBook.innerHTML = "Reporter pour ce cours" + lessonBook.innerHTML.replace(/^[^<]+/, "")
-          else if (info.event.extendedProps.price === 0) {
+          } else if (info.event.extendedProps.price === 0) {
             lessonBook.innerHTML = "Réserver" + lessonBook.innerHTML.replace(/^[^<]+/, "")
           } else {
             lessonBook.innerHTML = "Continuer vers le paiement" + lessonBook.innerHTML.replace(/^[^<]+/, "")

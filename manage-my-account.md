@@ -112,7 +112,7 @@ noindex: 1
 				  		clone.querySelectorAll(".booked-class-date")[0].innerText = startHuman
 				  		clone.querySelectorAll(".booked-class-duration")[0].innerText = durationHuman
 				  		clone.querySelectorAll(".booked-class-options > div").forEach((el) => {
-				  			const PCRO = el.dataset["postpone-or-credit-or-be-refunded-option"] === "1"
+				  			const PCRO = el.dataset.postponeOrCreditOrBeRefundedOption === "1"
                                                         el.style.display = (PCRO == booking.customer_can_postpone_or_credit_or_be_refunded) ? "flex" : "none"
 				  		})
 				  		clone.querySelectorAll("button").forEach((el) => {

@@ -96,7 +96,7 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
     <div class="booking" id="booking-info">
     	<p>Merci de remplir une adresse email valide, vous recevrez sur cette adresse toutes les informations pour vous connecter au cours.</p>
     	<input type="email" name="email" placeholder="jekiffeleyoga@gmail.com" id="email" />
-    	<button id="lesson-book" disabled="disabled" type="submit">Continuer vers le paiement<span id="wait"></span></button>
+    	<button id="lesson-book" disabled="disabled" type="submit"><span id="wait"></span></button>
     </div>
     <div class="booking" id="booking-full">
     	<p>Oups, ce cours est complet !</p>
@@ -149,6 +149,7 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 	  }
 	  // If postpone mode
           const emailInput = document.getElementById('email')
+	    const lessonBook = document.getElementById("lesson-book")
 	  if (window.location.hash.startsWith("#postpone?")) {
 	  	const params = new URLSearchParams(window.location.hash.slice(10))
 	  	window.vars.postponeMode = true
@@ -159,12 +160,10 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 	  	window.vars.lessonToPostponeId = params.get("lessonToPostponeId")
 	  	window.vars.alreadyBookedLessons = params.get("alreadyBookedLessons").split(",")
 	    document.getElementById("postpone-mode").style.display = "block"
-	    document.querySelector("#lesson-book").innerHTML = "Reporter pour ce cours" + document.querySelector("#lesson-book").innerHTML.replace(/^[^<]+/, "")
 	  }
 	    // Vars
 	    const modal = document.getElementById("modal")
 	    const calendarEl = document.getElementById('calendar');
-	    const lessonBook = document.getElementById("lesson-book")
 	    const reEmail = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
 	    const stripe = Stripe('pk_live_Pn9Hu57ZG2cuRQ0eplC3KcEl00mgnX2Bfg');
             if (!window.vars.postponeMode) {
@@ -191,7 +190,10 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 		  	}
 		  })
 		  .then(events => {
-		  	const filter = (window.vars.postponeMode) ? window.vars.alreadyBookedLessons : []
+		  	let filter = []
+		  	if (window.vars.postponeMode) {
+                           filter = window.vars.alreadyBookedLessons.concat(events.filter(e => e.price === 0))
+                        }
 		  	const filteredEvents = events.filter(e => ! filter.includes(e.id))
 		  	calendar.addEventSource({
 		  		events: filteredEvents,
@@ -249,6 +251,13 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 	          ["price", info.event.extendedProps.price],
 	          ["bookings-remaining", bookingsRemaining],
 	        ].map(r => replaceForLesson(r[0], r[1]))
+          if (window.vars.postponeMode) {
+            lessonBook.innerHTML = "Reporter pour ce cours" + lessonBook.innerHTML.replace(/^[^<]+/, "")
+          else if (info.event.extendedProps.price === 0) {
+            lessonBook.innerHTML = "Réserver" + lessonBook.innerHTML.replace(/^[^<]+/, "")
+          } else {
+            lessonBook.innerHTML = "Continuer vers le paiement" + lessonBook.innerHTML.replace(/^[^<]+/, "")
+          }
 	        // Diplay it
 	        modal.style.display = "flex"
           amplitude.getInstance().logEvent('openModal')
@@ -256,7 +265,7 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 	    })
 	    calendar.render()
 	    // Handle modal submit button
-	  	document.getElementById('lesson-book').addEventListener("click", () => {
+	  	lessonBook.addEventListener("click", () => {
 	  		// Loading animation
   		  clearAnimation = animateWaitElement(document.getElementById("wait"), lessonBook)
 	  		// Save email

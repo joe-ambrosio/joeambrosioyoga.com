@@ -192,7 +192,7 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 		  .then(events => {
 		  	let filter = []
 		  	if (window.vars.postponeMode) {
-                           filter = window.vars.alreadyBookedLessons.concat(events.filter(e => e.price === 0))
+                           filter = window.vars.alreadyBookedLessons.concat(events.filter(e => e.price === 0).map(e => e.id))
                         }
 		  	const filteredEvents = events.filter(e => ! filter.includes(e.id))
 		  	calendar.addEventSource({

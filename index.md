@@ -16,6 +16,10 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 	Cours crédité avec succès ! Le nouveau solde de votre compte est de <span class="new-balance"></span>€. Vous allez recevoir un email de confirmation.
 </div>
 
+<div id="cancel-successful" class="infobox end-of-flow-success">
+	Cours annulé avec succès !
+</div>
+
 <div id="refund-successful" class="infobox end-of-flow-success">
 	Cours remboursé avec succès ! Le remboursement se fera sur la carte bleue qui a servi au paiement sous 5 à 10 jours. Vous allez recevoir un email de confirmation.
 </div>
@@ -127,6 +131,10 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 	  else if (window.location.hash == "#postpone-successful") {
 	    document.getElementById("postpone-successful").style.display = "block"
       amplitude.getInstance().logEvent('postponeSuccessful')
+	  }
+	  else if (window.location.hash == "#cancel-successful") {
+	    document.getElementById("cancel-successful").style.display = "block"
+      amplitude.getInstance().logEvent('cancelSuccessful')
 	  }
 	  else if (window.location.hash == "#refund-successful") {
 	    document.getElementById("refund-successful").style.display = "block"

@@ -339,6 +339,9 @@ button {
     #lesson-id {
       display: none;
     }
+    #lesson-description {
+      padding-right: 20px;
+    }
     #lesson-time:first-letter {
         text-transform: uppercase;
     }
@@ -391,6 +394,9 @@ footer {
   }
   p {
     padding: 45px;
+  }
+  #lesson-description {
+    padding-right: 0px;
   }
 }
 

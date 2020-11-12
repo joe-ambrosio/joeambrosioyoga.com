@@ -158,6 +158,7 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
                 emailInput.disabled = true
 	  	window.vars.customerId = params.get("customerId")
 	  	window.vars.lessonToPostponeId = params.get("lessonToPostponeId")
+	  	window.vars.lessonToPostponePrice = parseInt(params.get("lessonToPostponePrice"))
 	  	window.vars.alreadyBookedLessons = params.get("alreadyBookedLessons").split(",")
 	    document.getElementById("postpone-mode").style.display = "block"
 	  }
@@ -192,7 +193,7 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 		  .then(events => {
 		  	let filter = []
 		  	if (window.vars.postponeMode) {
-                           filter = window.vars.alreadyBookedLessons.concat(events.filter(e => e.price === 0).map(e => e.id))
+                           filter = window.vars.alreadyBookedLessons.concat(events.filter(e => e.price !== window.vars.lessonToPostponePrice).map(e => e.id))
                         }
 		  	const filteredEvents = events.filter(e => ! filter.includes(e.id))
 		  	calendar.addEventSource({

@@ -25,8 +25,8 @@ noindex: 1
 	<div class="booked-class-options">
 		<div data-postpone-or-credit-or-be-refunded-option="1">
 			<h3>Reporter ce cours</h3>
-			<p>Reporter gratuitement cette réservation sur le cours de votre choix. Recommandé si vous ne pouvez pas assister à ce cours mais voulez assister à un autre cours déjà planifié.</p>
-			<button data-href="/#postpone?customerId=%customerId%&customerEmail=%customerEmail%&lessonToPostponeId=%currentLessonId%&alreadyBookedLessons=%alreadyBookedLessons%" data-onclick="redirect">Reporter<span class="wait"></span></button>
+			<p>Reporter gratuitement cette réservation sur le cours de votre choix. Le cours choisi doit être au même prix que celui déjà réservé. Recommandé si vous ne pouvez pas assister à ce cours mais voulez assister à un autre cours déjà planifié.</p>
+			<button data-href="/#postpone?customerId=%customerId%&customerEmail=%customerEmail%&lessonToPostponeId=%currentLessonId%&alreadyBookedLessons=%alreadyBookedLessons%&lessonToPostponePrice=%lessonToPostponePrice%" data-onclick="redirect">Reporter<span class="wait"></span></button>
 		</div>
 		<div data-postpone-or-credit-or-be-refunded-option="1">
 			<h3>Créditer mon compte</h3>
@@ -117,6 +117,7 @@ noindex: 1
 				  		})
 				  		clone.querySelectorAll("button").forEach((el) => {
 				  			el.dataset.href = el.dataset.href.replace("%currentLessonId%", booking.id)
+				  			el.dataset.href = el.dataset.href.replace("%lessonToPostponePrice%", booking.price)
 				  			el.dataset.href = el.dataset.href.replace("%customerId%", customerId)
 				  			el.dataset.href = el.dataset.href.replace("%customerEmail%", account.email)
 				  			el.dataset.href = el.dataset.href.replace("%alreadyBookedLessons%", alreadyBookedLessons.join(","))

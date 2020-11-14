@@ -35,6 +35,14 @@ h2 {
   font-style: normal;
 }
 
+#news {
+  padding: 20px 110px;
+  p {
+    padding: 0;
+    text-align: center;
+  }
+}
+
 header {
   h1 {
     line-height: 40px;
@@ -398,6 +406,10 @@ footer {
   #lesson-description {
     padding-right: 0px;
   }
+  #news {
+    padding: 5px 20px;
+    margin: 0px 0 30px;
+  }
 }
 
 @media screen and (max-width: 1023px) {
@@ -456,7 +468,7 @@ footer {
   #modal > div {
     padding: 15px;
   }
-  #book > *, #yoga-types-info > :first-child, .end-of-flow-success, #postpone-mode, #my-account-summary, .booked-class {
+  #book > *, #yoga-types-info > :first-child, .end-of-flow-success, #postpone-mode, #my-account-summary, .booked-class, #news {
     margin-bottom: 30px;
   }
   #instagram-logo {

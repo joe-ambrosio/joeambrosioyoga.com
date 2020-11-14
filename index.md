@@ -32,6 +32,14 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 	Pour finaliser votre report de cours, veuillez sélectionner le nouveau cours qui vous convient. 
 </div>
 
+{% if site.news %}
+<div id="news" class="infobox">
+    <p>
+      {{ site.news }}
+    </p>
+</div>
+{% endif %}
+
 <div id="welcome" class="infobox">
 	<p>
 		Hey, bienvenue ! 

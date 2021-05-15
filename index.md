@@ -189,6 +189,7 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 	    window.addEventListener("click", (event) => {
 	      event.target == modal && closeModal()
 	    })
+			{% if site.bookingEnabled %}
 			// Fetch events
 	  	fetch('{{site.apiBaseUrl}}/events.json')
 		  .then(response => {
@@ -215,6 +216,7 @@ description: "Hey, bienvenue ! Je m’appelle Joe, et je vous propose ici de dé
 		  	calendarEl.prepend("Impossible de récupérer les cours actuellement, revenez plus tard.")
         amplitude.getInstance().logEvent('errGetEvents', {err: String(err)})
 		  })
+		  {% endif %}
 	    // Validate email in real time
 	  	emailInput.addEventListener("input", (event) => {
 	      	lessonBook.disabled = ! reEmail.test(String(event.target.value).toLowerCase())
